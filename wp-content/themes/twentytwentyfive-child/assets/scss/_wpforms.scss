@@ -1,0 +1,83 @@
+@use 'variables' as *;
+
+
+.wpforms-container {
+  background-color: $white;
+  width: 100%;
+
+  input[type=checkbox]:before,
+  input[type=radio]:before {
+    border-color: $CTA !important;
+    background-color: $white !important;
+    border-radius: 3px;
+  }
+
+
+  .wpforms-field {
+
+    .wpforms-field-medium,
+    .iti,
+    select {
+      width: 100%;
+      max-width: 100%;
+      padding-left: 0.75rem;
+      border: none;
+      border: 0.05rem solid $CTA;
+      color: $gray;
+      @include font-size(11);
+      border-radius: 0.5rem;
+      background: $white;
+
+      &::placeholder,
+      &.placeholder {
+        font-weight: 400;
+        @include font-size(11);
+        color: $gray;
+      }
+
+      input[type=tel] {
+        border: none !important;
+      }
+    }
+  }
+
+
+
+
+
+  input.wpforms-field-medium,
+  select.wpforms-field-medium,
+  .wpforms-field-row.wpforms-field-medium {
+    max-width: 100%;
+    background-color: $white !important;
+  }
+
+  label.wpforms-field-label-inline {
+    color: $gray;
+  }
+
+  .wpforms-submit-container {
+    text-align: right;
+    padding: 0;
+
+    .wpforms-submit {
+      font-weight: bold;
+      letter-spacing: 0.05rem;
+    }
+  }
+
+}
+
+div.wpforms-container-full .wpforms-confirmation-container-full,
+div[submit-success]>.wpforms-confirmation-container-full:not(.wpforms-redirection-message) {
+  background: $white;
+  color: $gray;
+  box-sizing: border-box;
+}
+
+
+div.wpforms-container-full .wpforms-confirmation-container-full p,
+div[submit-success]>.wpforms-confirmation-container-full:not(.wpforms-redirection-message) p {
+  color: $gray;
+  @include font-size(11);
+}

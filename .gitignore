@@ -4,9 +4,11 @@
 # Excepto wp-content y lo que hay dentro
 !wp-content/
 !wp-content/themes/
-!wp-content/themes/doga/
-!wp-content/themes/doga/**
-wp-content/themes/doga/node_modules/
+!wp-content/themes/twentytwentyfive/
+!wp-content/themes/twentytwentyfive/**
+!wp-content/themes/twentytwentyfive-child/
+!wp-content/themes/twentytwentyfive-child/**
+wp-content/themes/twentytwentyfive-child/node_modules/
 
 !wp-content/uploads/
 !wp-content/uploads/**

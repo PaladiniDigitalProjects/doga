@@ -1,0 +1,105 @@
+@use 'variables' as *;
+
+
+
+// ICO MENU
+
+body {
+  &.active {
+    position: fixed;
+
+    .menu-content {
+      margin: 0 !important;
+    }
+  }
+}
+
+
+/* MENU NAV */
+
+
+.menu {
+  display: flex;
+  justify-content:space-between;
+  min-width: 10rem;
+
+  .wpml-language-switcher-block {
+    width: 5rem !important;
+
+    .current-language-item {
+      display: block;
+      padding-right: 2rem !important;
+      background: url('../images/ico_lang.svg') top right no-repeat !important;
+      background-size: 1.25rem auto !important;
+    }
+  }
+
+  .wpml-ls-dropdown {
+    .wp-block-navigation__container {
+      .wp-block-navigation__submenu-container {
+        background-color:$primary !important;
+        display: block;
+        padding: 0.5rem 1.5rem 0.5rem 0.5rem !important;
+        width: 3rem !important;
+        margin-left: -0.4rem !important;
+        border-radius: 0 0 10px 10px !important;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+
+  & > nav {
+    width: calc(100% - 5rem);
+    
+    .wp-block-navigation__responsive-container {
+      padding: 0 !important;
+      background-color: $primary !important;
+
+      .wp-block-navigation-item__content {
+        border:none !important;
+        .wp-block-navigation-item__label {
+          background-color: transparent !important;
+        }
+      }
+    
+      .wp-block-navigation-item__label {
+        color:$white !important;
+        text-align: left !important;
+        background-color: transparent;
+      }
+    }
+
+    ul.wp-block-navigation-submenu {
+      padding: 0 0 10px 0!important;
+      border-radius: 1rem !important;
+      background-color: $primary !important;
+      border:none !important;
+      
+      margin-left: -1.2rem !important;
+      display: none !important;
+
+    }
+
+    .search-nav {
+      margin: 0 1rem !important ;
+      .wp-block-navigation-item__content {
+        display: block;
+        width: 1.25rem;
+        height: 1.25rem;
+        background: url('../images/ico_search.svg') center right no-repeat !important;
+        background-size: 1.25rem auto !important;
+      }
+      a span {
+        display: none;
+      }
+    }
+
+  @include tablet {
+    ul.wp-block-navigation-submenu {
+      display: block !important;
+      }
+    } 
+  }
+}

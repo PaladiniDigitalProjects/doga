@@ -1,0 +1,30 @@
+@use 'variables' as *;
+@use 'variables.scss';
+@use 'generics.scss';
+@use 'header.scss';
+@use 'buttons.scss';
+@use 'animacions.scss';
+@use 'wpforms.scss';
+@use 'localizaciones.scss';
+@use 'nav.scss';
+@use 'listados.scss';
+@use 'single.scss';
+@use 'category.scss';
+@use 'nutrities.scss';
+@use 'components.scss';
+@use 'event.scss';
+@use 'page.scss';
+@use 'grid.scss';
+
+
+// BLOCKS
+
+@use 'blocks/slider.scss';
+// @use 'blocks/block-menu.scss';
+// @use 'blocks/related.scss';
+// @use 'blocks/events.scss';
+// @use 'blocks/projects-slider.scss';
+@use 'blocks/carousell.scss';
+
+@use 'blocks/noticias.scss';
+@use 'blocks/relacionado.scss';

@@ -1,0 +1,27 @@
+.page-main-title .elementor-heading-title {
+    position: relative;
+    z-index: 9;
+    padding: 20px 25px 18px 0 !important;
+}
+
+.page-main-title .elementor-heading-title::after {
+    display: block !important;
+    position: absolute;
+    content: "";
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 60000px;
+    z-index: -1;
+    border-radius: 0px 20px 20px 0px;
+    background: #077889;
+    opacity: 0.5;
+    backdrop-filter: blur(6.5px);
+}
+
+@media (max-width:767px) {
+    .page-main-title .elementor-heading-title {
+        padding: 30px 20px 30px 0 !important;
+    }
+}

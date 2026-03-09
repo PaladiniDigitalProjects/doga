@@ -1,0 +1,148 @@
+/* common style */
+.common-accordion .e-n-accordion-item-title-icon svg {
+    fill: none !important;
+}
+
+.common-accordion .e-n-accordion-item-title:focus,
+.common-accordion .e-n-accordion-item-title:focus-visible,
+.common-accordion .e-n-accordion-item-title:focus-within {
+    outline: none;
+}
+
+.common-strong-style strong,
+.common-strong-style b {
+    font-family: "Galyon-Bold", Sans-serif !important;
+}
+
+.common-red-radial-gredient {
+    background: radial-gradient(44.66% 44.66% at 50% 55.34%, #AE3638 0%, #620708 100%) !important;
+}
+
+.common-backdrop-filter {
+    backdrop-filter: blur(3px) !important;
+
+}
+
+/* common style */
+
+
+/* Key Industry Section */
+.key-industrys-section .btn-red-gradient .elementor-button-icon {
+    align-items: end;
+}
+
+.key-industrys-section .btn-red-gradient .elementor-button-text {
+    text-align: left;
+}
+
+/* Key Industry Section */
+
+
+/* Related Products Lines Section */
+
+
+.related-products-lines-section .related-product-arrow .elementor-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #5E77A3;
+    border: 1px solid #5E77A3 !important;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: 0.5s ease all;
+    -webkit-transition: 0.5s ease all;
+    -moz-transition: 0.5s ease all;
+    -ms-transition: 0.5s ease all;
+    -o-transition: 0.5s ease all;
+}
+
+/* .related-products-lines-section .electronics-product .related-product-arrow .elementor-icon {
+}
+
+.related-products-lines-section .drive-electronics-product .related-product-arrow .elementor-icon {
+    background: #9CC1E580;
+    border: 1px solid #9CC1E580 !important;
+} */
+
+.related-products-lines-section .related-product-line-item .related-product-line-image::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.related-products-lines-section .electronics-product .related-product-line-image::after {
+    background: linear-gradient(180deg, rgba(10, 58, 94, 0.00) 24.13%, #0A3A5E 100%);
+}
+
+.related-products-lines-section .drive-electronics-product .related-product-line-image::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(10, 58, 94, 0.50) 0%, rgba(10, 58, 94, 0.50) 100%), linear-gradient(180deg, rgba(10, 58, 94, 0.00) 24.13%, #0A3A5E 100%);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+
+
+.related-products-lines-section .related-product-arrow .elementor-icon svg {
+    fill: none !important;
+}
+
+.related-products-lines-section .related-product-line-image {
+    height: 100%;
+    width: 100% !important;
+}
+
+.related-products-lines-section .related-product-line-item .related-product-line-image {
+    transition: 0.5s ease all;
+    -webkit-transition: 0.5s ease all;
+    -moz-transition: 0.5s ease all;
+    -ms-transition: 0.5s ease all;
+    -o-transition: 0.5s ease all;
+}
+
+.related-products-lines-section .related-product-line-item:hover .related-product-line-image {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+
+.related-products-lines-section .related-product-line-item:hover .related-product-arrow .elementor-icon {
+    background: transparent !important;
+}
+
+/* Related Products Lines Section */
+
+@media (max-width:767px) {
+    .related-products-lines-section .related-product-arrow .elementor-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+    .application-item {
+        position: relative !important;
+    }
+}
+
+@media (max-width:575px) {
+    .related-products-lines-section .related-product-line-item {
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,208 @@
+.project-block {
+    width: 100%;
+    max-width: 744px;
+    backdrop-filter: blur(5.599999904632568px);
+}
+
+.project-img-1 {
+    z-index: -1 !important;
+}
+
+.global-leader-content {
+    width: 100% !important;
+    max-width: 1342px !important;
+    margin: 0 auto !important;
+}
+
+.global-leader-block {
+    width: 100%;
+    max-width: 378px;
+    backdrop-filter: blur(2.5999999046325684px);
+    z-index: 99 !important;
+    flex: 0 0 auto !important;
+}
+
+.global-leader-block-title {
+    width: 100%;
+    max-width: 265px !important;
+    margin: 0 auto;
+}
+
+.global-leader-block .common-p-style {
+    width: 100%;
+    max-width: 237px !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.global-leader-center-block {
+    max-width: 795px !important;
+}
+
+.global-leader-center-block .common-title-color-style .elementor-heading-title span {
+    display: block !important;
+}
+
+.global-leader-center-block .common-p-style {
+    width: 100%;
+    max-width: 642px !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.global-leader-wrp {
+    width: 100% !important;
+    max-width: 980px !important;
+}
+
+.global-leader-wrp>* {
+    height: 100% !important;
+}
+
+.global-leader-wrp .common-p-style {
+    max-width: 220px !important;
+}
+
+.global-leader-wrp>*:last-child .common-p-style {
+    max-width: 320px !important;
+}
+
+.global-wiper-system-btn {
+    padding: 0 15px;
+}
+
+.global-wiper-system-btn a {
+    padding: 15px;
+    border-radius: 10px !important;
+    border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    background: rgba(244, 0, 0, 0.65) !important;
+    box-shadow: 0px 4px 7.9px 0px rgba(0, 0, 0, 0.08) !important;
+    backdrop-filter: blur(2.799999952316284px) !important;
+    -webkit-border-radius: 10px !important;
+    -moz-border-radius: 10px !important;
+    -ms-border-radius: 10px !important;
+    -o-border-radius: 10px !important;
+}
+
+.global-wiper-system-btn a span {
+    align-items: flex-end !important;
+    gap: 10px !important;
+}
+
+.features-content .common-p-style {
+    max-width: 780px !important;
+    margin: 0 auto !important;
+}
+
+.features-block {
+    max-width: 1250px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.features-icon {
+    height: 95px !important;
+    margin: 0 auto !important;
+    box-shadow: 0px 4px 7.9px 0px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(9.899999618530273px);
+}
+
+.features-icon *{
+    max-height: 100% !important;
+}
+
+.features-title{
+    margin: 0 auto !important;
+}
+
+.features-wrp .common-p-style{
+    max-width: 232px !important;
+}
+
+@media(max-width: 1399px) {
+    .global-leader-center-block {
+        max-width: 520px !important;
+    }
+
+    .global-leader-wrp {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    .global-wiper-system-btn {
+        padding: 0;
+    }
+}
+
+@media(max-width: 1200px) {
+    .global-leader-center-block {
+        position: relative !important;
+        transform: unset !important;
+        -webkit-transform: unset !important;
+        -moz-transform: unset !important;
+        -ms-transform: unset !important;
+        -o-transform: unset !important;
+        left: unset !important;
+        top: unset !important;
+    }
+}
+
+@media(max-width: 1280px) {
+    .global-leader-block {
+        max-width: 330px;
+    }
+}
+
+@media(max-width: 1024px) {
+    .global-leader-center-block {
+        max-width: 100% !important;
+        order: 1 !important;
+    }
+
+    .global-leader-content>*:first-child {
+        order: 2 !important;
+    }
+
+    .global-leader-content>*:last-child {
+        order: 3 !important;
+    }
+
+    .global-leader-main-content {
+        width: 100% !important;
+        max-width: 700px !important;
+        margin: 0 auto !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .project-img-1 {
+        display: none;
+    }
+
+    .mobile-project-img-1 {
+        z-index: -1 !important;
+    }
+
+    .global-leader-block .common-p-style {
+        max-width: 100% !important;
+    }
+
+    .global-wiper-system-btn a {
+        max-width: 205px !important;
+    }
+
+    .global-wiper-system-btn a span {
+        gap: 0 !important;
+    }
+
+    .global-wiper-system-btn a span .elementor-button-icon {
+        position: absolute !important;
+        right: 15px !important;
+    }
+
+    .global-wiper-system-btn a {
+        padding: 10px 15px !important;
+    }
+
+    .features-icon{height: 80px !important; background: rgba(75, 147, 255, 0.12) !important;}
+}

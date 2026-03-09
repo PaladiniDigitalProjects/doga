@@ -1,0 +1,30 @@
+# Ignorar todo por defecto
+*
+
+# Excepto wp-content y lo que hay dentro
+!wp-content/
+!wp-content/themes/
+!wp-content/themes/doga/
+!wp-content/themes/doga/**
+wp-content/themes/doga/node_modules/
+
+!wp-content/uploads/
+!wp-content/uploads/**
+
+wp-content/plugins/
+wp-content/plugins/**/
+
+# Carpetas de sistema/caché
+wp-content/uploads/cache/
+wp-content/uploads/rank-math/
+wp-content/uploads/siteground-optimizer-assets/
+wp-content/uploads/wp-migrate-db/
+wp-content/uploads/wpallexport/
+wp-content/uploads/wpallimport/
+
+# Videos >100MB (límite GitHub)
+# wp-content/uploads/YYYY/MM/archivo-grande.mov
+
+# Añade aquí plugins custom con el mismo patrón
+# !wp-content/plugins/mi-plugin-custom/
+# !wp-content/plugins/mi-plugin-custom/**

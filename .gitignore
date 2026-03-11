@@ -12,6 +12,10 @@ wp-content/themes/twentytwentyfive-child/node_modules/
 
 !wp-content/uploads/
 !wp-content/uploads/**
+!wp-content/uploads/2025
+!wp-content/uploads/2025/**
+!wp-content/uploads/2026
+!wp-content/uploads/2026/**
 
 wp-content/plugins/
 wp-content/plugins/**/

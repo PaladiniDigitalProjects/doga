@@ -15,6 +15,7 @@
   --wp-bkg-color: #ECECEC;
   --wp--style--root--padding-top: 0;
   --wp--style--root--padding-bottom: 0;
+  --wp--font-family: 'Manrope', sans-serif;
 }
 
 html {
@@ -42,6 +43,7 @@ html {
 
 body {
   background-color: var(--wp-bkg-color);
+  font-family: var(--wp--font-family);
 }
 
 .pointer:hover {

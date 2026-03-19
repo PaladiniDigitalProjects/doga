@@ -3643,7 +3643,14 @@ body.active .menu-content {
 .wp-block-pds-map-locations-filter-map-locations-filter .mlf-filters .mlf-search-wrapper {
   margin-right: 10rem;
 }
+.wp-block-pds-map-locations-filter-map-locations-filter .pds-map-filters {
+  position: relative;
+  width: 100%;
+}
 .wp-block-pds-map-locations-filter-map-locations-filter .pds-map-filters .mlf-filters-select {
+  top: 2rem;
+  right: -15rem;
+  position: absolute;
   font-weight: bold;
   padding: 0.5rem 2rem;
 }

@@ -208,7 +208,13 @@
   }
 
   .pds-map-filters {
+    position: relative;
+    width: 100%;
+
     .mlf-filters-select {
+      top: 02rem;
+      right: -15rem;
+      position: absolute;
       font-weight: bold;
       padding: 0.5rem 2rem;
     }

@@ -1,0 +1,27 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "pds-motor-finder/filter",
+    "title": "Motor Finder",
+    "category": "widgets",
+    "description": "Buscador y filtro de productos por taxonomía con AJAX.",
+    "keywords": ["motor", "filter", "finder", "pds"],
+    "textdomain": "pds-motor-finder",
+    "attributes": {
+        "postType": {
+            "type": "string",
+            "default": "product"
+        },
+        "taxonomy": {
+            "type": "string",
+            "default": "motor-spec"
+        }
+    },
+    "supports": {
+        "html": false,
+        "align": ["wide", "full"]
+    },
+    "editorScript": "file:./build/editor.js",
+    "viewScript":   "file:./build/frontend.js",
+    "render":       "file:./render.php"
+}

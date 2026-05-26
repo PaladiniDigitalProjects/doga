@@ -161,15 +161,18 @@ function pds_render_motor_spec_grouped( $block_content, $block ) {
         'order'      => 'ASC',
     ] );
 
-    $html = '<dl class="motor-specs-grouped">';
+    $html = '<div class="motor-specs-grouped">';
     foreach ( $all_parents as $parent ) {
         if ( empty( $child_terms[ $parent->term_id ] ) ) continue;
-        $html .= '<dt class="motor-spec-group__label">' . esc_html( $parent->name ) . '</dt>';
-        foreach ( $child_terms[ $parent->term_id ] as $child ) {
-            $html .= '<dd class="motor-spec-group__value">' . esc_html( $child->name ) . '</dd>';
-        }
+        $html .= '<div class="motor-spec-row">';
+        $html .= '<span class="motor-spec-row__label">' . esc_html( $parent->name ) . '</span>';
+        $html .= '<span class="motor-spec-row__value">';
+        $values = array_map( fn( $t ) => esc_html( $t->name ), $child_terms[ $parent->term_id ] );
+        $html .= implode( ', ', $values );
+        $html .= '</span>';
+        $html .= '</div>';
     }
-    $html .= '</dl>';
+    $html .= '</div>';
 
     return $html;
 }

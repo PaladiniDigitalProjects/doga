@@ -3076,6 +3076,30 @@ body.active .menu-content {
   }
 }
 
+/* RESOURCES */
+.resourcesBlock .qf-filter {
+  display: none;
+}
+.resourcesBlock .wp-block-cover__inner-container {
+  width: 100%;
+}
+.resourcesBlock .wp-block-cover__inner-container ul li {
+  transition: 0.35s;
+}
+.resourcesBlock .wp-block-cover__inner-container ul li a {
+  text-align: center;
+  display: block;
+  text-align: center;
+  text-decoration: none !important;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  line-height: 100%;
+  padding: 0.5rem 1rem;
+}
+.resourcesBlock .wp-block-cover__inner-container ul li:hover {
+  transform: scale(105%);
+}
+
 .single main {
   position: relative;
   margin-top: 0 !important;

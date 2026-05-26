@@ -1,0 +1,31 @@
+// Motor Specs Grouped — dl/dt/dd
+// Renderizado por pds-motor-finder (render_block filter)
+
+dl.motor-specs-grouped {
+    margin: 1rem 0;
+
+    dt,
+    dd {
+        margin: 0;
+        padding: 0;
+    }
+
+    dt {
+        font-weight: 600;
+        font-size: 0.78em;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #465466; // Slate DOGA
+        margin-top: 1rem;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
+
+    dd {
+        font-size: 0.9em;
+        color: #1D669D; // Mid-blue DOGA
+        margin-left: 0;
+    }
+}

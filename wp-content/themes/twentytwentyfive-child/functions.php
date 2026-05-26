@@ -985,6 +985,41 @@ function pds_register_taxonomies() {
 	] );
 
 	/**
+	 * Taxonomy: Motor Spec.
+	 * Especificaciones técnicas de motores para filtrado.
+	 * Términos importados desde Google Sheet (2026-05-26).
+	 * Script de reimportación: ~/wp-deploy/scripts/doga-import-motor-specs.php
+	 */
+	register_taxonomy( 'motor-spec', [ 'product' ], [
+		'label'               => __( 'Motor Specs', 'pds-motor-finder' ),
+		'labels'              => [
+			'name'              => __( 'Motor Specs', 'pds-motor-finder' ),
+			'singular_name'     => __( 'Motor Spec', 'pds-motor-finder' ),
+			'menu_name'         => __( 'Motor Specs', 'pds-motor-finder' ),
+			'all_items'         => __( 'All Motor Specs', 'pds-motor-finder' ),
+			'edit_item'         => __( 'Edit Motor Spec', 'pds-motor-finder' ),
+			'add_new_item'      => __( 'Add New Motor Spec', 'pds-motor-finder' ),
+			'new_item_name'     => __( 'New Motor Spec Name', 'pds-motor-finder' ),
+			'search_items'      => __( 'Search Motor Specs', 'pds-motor-finder' ),
+			'parent_item'       => __( 'Parent Spec', 'pds-motor-finder' ),
+			'parent_item_colon' => __( 'Parent Spec:', 'pds-motor-finder' ),
+			'not_found'         => __( 'No motor specs found', 'pds-motor-finder' ),
+		],
+		'hierarchical'        => true,
+		'public'              => true,
+		'publicly_queryable'  => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_nav_menus'   => true,
+		'show_admin_column'   => true,
+		'show_in_rest'        => true,
+		'show_tagcloud'       => false,
+		'query_var'           => true,
+		'rewrite'             => [ 'slug' => 'motor-spec', 'with_front' => false ],
+		'rest_base'           => 'motor-spec',
+	] );
+
+	/**
 	 * Taxonomy: Markets.
 	 */
 	register_taxonomy( "market", [ "post", "page" ], [

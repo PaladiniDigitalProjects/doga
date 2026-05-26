@@ -1,0 +1,132 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "pds-acf-field-block/field",
+  "version": "2.0.0",
+  "title": "Campo ACF (PDS)",
+  "category": "theme",
+  "icon": "database",
+  "description": "Muestra el valor de cualquier campo ACF con control total de tipografía, colores y espaciado. Ideal para Query Loop.",
+  "keywords": ["acf", "campo", "field", "custom field", "meta", "query", "pds"],
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "className": true,
+    "color": {
+      "text": true,
+      "background": true,
+      "link": true,
+      "gradients": true,
+      "__experimentalDefaultControls": {
+        "background": true,
+        "text": true
+      }
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true,
+      "fontFamily": true,
+      "fontWeight": true,
+      "fontStyle": true,
+      "letterSpacing": true,
+      "textDecoration": true,
+      "textTransform": true,
+      "__experimentalFontFamily": true,
+      "__experimentalFontWeight": true,
+      "__experimentalFontStyle": true,
+      "__experimentalLetterSpacing": true,
+      "__experimentalTextDecoration": true,
+      "__experimentalTextTransform": true,
+      "__experimentalDefaultControls": {
+        "fontSize": true,
+        "fontFamily": true
+      }
+    },
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": false,
+      "__experimentalDefaultControls": {
+        "margin": false,
+        "padding": false
+      }
+    },
+    "border": {
+      "color": true,
+      "radius": true,
+      "style": true,
+      "width": true,
+      "__experimentalDefaultControls": {
+        "color": false,
+        "radius": false,
+        "style": false,
+        "width": false
+      }
+    },
+    "__experimentalSelector": ".pds-acf-field-block",
+    "shadow": true
+  },
+  "usesContext": ["postId", "postType"],
+  "attributes": {
+    "fieldName": {
+      "type": "string",
+      "default": ""
+    },
+    "displayType": {
+      "type": "string",
+      "default": "text",
+      "enum": ["text", "image", "link", "html"]
+    },
+    "htmlTag": {
+      "type": "string",
+      "default": "p"
+    },
+    "prefix": {
+      "type": "string",
+      "default": ""
+    },
+    "suffix": {
+      "type": "string",
+      "default": ""
+    },
+    "fallback": {
+      "type": "string",
+      "default": ""
+    },
+    "imageSize": {
+      "type": "string",
+      "default": "full"
+    },
+    "imageFit": {
+      "type": "string",
+      "default": "cover",
+      "enum": ["cover", "contain", "fill", "none"]
+    },
+    "imageWidth": {
+      "type": "string",
+      "default": ""
+    },
+    "imageHeight": {
+      "type": "string",
+      "default": ""
+    },
+    "linkText": {
+      "type": "string",
+      "default": ""
+    },
+    "linkTarget": {
+      "type": "string",
+      "default": "_self",
+      "enum": ["_self", "_blank"]
+    },
+    "textAlign": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "pds-acf-field-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style.css",
+  "render": "file:./render.php"
+}

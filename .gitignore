@@ -26,6 +26,8 @@ wp-content/plugins/pds-motor-finder/node_modules/
 wp-content/plugins/pds-motor-finder/node_modules/**
 !wp-content/plugins/predictive-search-plugin/
 !wp-content/plugins/predictive-search-plugin/**
+!wp-content/plugins/pds-acf-block/
+!wp-content/plugins/pds-acf-block/**
 
 # Carpetas de sistema/caché
 wp-content/uploads/cache/

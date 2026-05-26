@@ -1,0 +1,24 @@
+/* ACF Field Block — Frontend Styles */
+
+.acf-field-block {
+    box-sizing: border-box;
+}
+
+.acf-field-block img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.acf-field-block figure {
+    margin: 0;
+}
+
+.acf-field-block a {
+    color: inherit;
+}
+
+.acf-field-block__prefix,
+.acf-field-block__suffix {
+    /* Prefijos y sufijos heredan el estilo del bloque */
+}

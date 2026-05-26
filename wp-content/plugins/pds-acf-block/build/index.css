@@ -1,0 +1,98 @@
+/* =========================================================
+   ACF Field Block — Editor Styles
+   ========================================================= */
+
+/* ── Canvas del bloque ──────────────────────────────────── */
+.acf-field-block {
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Estado vacío (sin campo seleccionado) */
+.acf-field-block--empty {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    border: 2px dashed var(--wp-admin-theme-color, #007cba);
+    border-radius: 4px;
+    padding: 10px 14px;
+    background: color-mix(in srgb, var(--wp-admin-theme-color, #007cba) 6%, transparent);
+}
+
+.acf-field-block__empty-label {
+    display: flex;
+    align-items: center;
+    color: var(--wp-admin-theme-color, #007cba);
+    font-size: 13px;
+    font-style: italic;
+    opacity: 0.8;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── Contenido del canvas cuando hay campo ──────────────── */
+.acf-field-block__canvas-inner {
+    display: flex;
+    align-items: center;
+}
+
+.acf-field-block__text-preview,
+.acf-field-block__image-preview {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.acf-field-block__canvas-icon {
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.acf-field-block__canvas-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.acf-field-block__canvas-meta strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.acf-field-block__canvas-meta small {
+    display: block;
+    font-size: 11px;
+    font-family: monospace;
+    color: #888;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Indicador visual de campo activo ───────────────────── */
+.acf-field-block:not(.acf-field-block--empty) {
+    outline: 1px dashed color-mix(in srgb, var(--wp-admin-theme-color, #007cba) 40%, transparent);
+    outline-offset: 2px;
+    border-radius: 2px;
+    padding: 8px 12px;
+    min-height: 44px;
+}
+
+/* Cuando el bloque está seleccionado en el editor */
+.is-selected .acf-field-block:not(.acf-field-block--empty) {
+    outline-color: var(--wp-admin-theme-color, #007cba);
+    background: color-mix(in srgb, var(--wp-admin-theme-color, #007cba) 4%, transparent);
+}
+
+/* ── Respetar los estilos que Gutenberg inyecta ─────────── */
+/* Gutenberg añade estilos inline en el wrapper vía useBlockProps,
+   así que los valores de color/tipografía/spacing/border se aplican
+   directamente al elemento raíz generado por get_block_wrapper_attributes() */

@@ -245,6 +245,28 @@ figcaption {
     }
   }
 
+  &.grid5 {
+
+
+    @include tablet {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 1.5rem;
+      row-gap: 1.5rem;
+    }
+
+    @include laptop {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 2rem;
+      row-gap: 2rem;
+    }
+
+    @include large {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      column-gap: 2rem;
+      row-gap: 2rem;
+    }
+  }
+
   >.wp-block-group {
     width: 100%;
   }

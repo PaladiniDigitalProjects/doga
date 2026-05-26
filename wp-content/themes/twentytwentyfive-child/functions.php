@@ -25,21 +25,6 @@ function my_theme_enqueue_assets() {
         wp_get_theme()->get( 'Version' )
     );
 
-    // OWL STILS
-
-    wp_enqueue_style(
-        'owl-css', 
-        get_template_directory_uri() . '-child/assets/css/owl.carousel.min.css',
-
-        true
-    );
-
-	wp_enqueue_style(
-        'owl-theme',
-        get_template_directory_uri() . '-child/assets/css/owl.theme.default.min.css',
-        true
-    );
-
 
 
     // Ensure jQuery is available.
@@ -51,13 +36,6 @@ function my_theme_enqueue_assets() {
         get_stylesheet_directory_uri() . '/assets/js/main.js',
         [ 'jquery' ],
         '1.0.0',
-        true
-    );
-
-    // Carrusell Antic OWL.
-    wp_enqueue_script(
-        'owl-carrousell',
-        get_stylesheet_directory_uri() . '/assets/js/owl.carousel.js',
         true
     );
 
@@ -131,17 +109,8 @@ function login_stylesheet() {
 }
 add_action( 'login_enqueue_scripts', 'login_stylesheet' );
 
-/* HIDE JSON API */
-
-add_filter( 'rest_authentication_errors', function( $result ) {
-    if ( ! is_user_logged_in() ) {
-        return new WP_Error( 'rest_disabled', 'REST API restricted to authenticated users.', array( 'status' => 401 ) );
-    }
-    return $result;
-});
 
 /* LOGIN H1 URL */
-
 
 function my_login_logo_url() {
     return home_url();
@@ -274,38 +243,38 @@ function register_product_post_type()
 {
 
     $labels = array(
-        'name' => _x('Products', 'Post Type General Name', 'textdomain'),
-        'singular_name' => _x('Product', 'Post Type Singular Name', 'textdomain'),
-        'menu_name' => __('Products', 'textdomain'),
-        'name_admin_bar' => __('Product', 'textdomain'),
-        'archives' => __('Product Archives', 'textdomain'),
-        'attributes' => __('Product Attributes', 'textdomain'),
-        'parent_item_colon' => __('Parent Product:', 'textdomain'),
-        'all_items' => __('All Products', 'textdomain'),
-        'add_new_item' => __('Add New Product', 'textdomain'),
-        'add_new' => __('Add New', 'textdomain'),
-        'new_item' => __('New Product', 'textdomain'),
-        'edit_item' => __('Edit Product', 'textdomain'),
-        'update_item' => __('Update Product', 'textdomain'),
-        'view_item' => __('View Product', 'textdomain'),
-        'view_items' => __('View Products', 'textdomain'),
-        'search_items' => __('Search Products', 'textdomain'),
-        'not_found' => __('Not found', 'textdomain'),
-        'not_found_in_trash' => __('Not found in Trash', 'textdomain'),
-        'featured_image' => __('Featured Image', 'textdomain'),
-        'set_featured_image' => __('Set featured image', 'textdomain'),
-        'remove_featured_image' => __('Remove featured image', 'textdomain'),
-        'use_featured_image' => __('Use as featured image', 'textdomain'),
-        'insert_into_item' => __('Insert into product', 'textdomain'),
-        'uploaded_to_this_item' => __('Uploaded to this product', 'textdomain'),
-        'items_list' => __('Products list', 'textdomain'),
-        'items_list_navigation' => __('Products list navigation', 'textdomain'),
-        'filter_items_list' => __('Filter products list', 'textdomain'),
+        'name' => _x('Products', 'Post Type General Name', 'PDP'),
+        'singular_name' => _x('Product', 'Post Type Singular Name', 'PDP'),
+        'menu_name' => __('Products', 'PDP'),
+        'name_admin_bar' => __('Product', 'PDP'),
+        'archives' => __('Product Archives', 'PDP'),
+        'attributes' => __('Product Attributes', 'PDP'),
+        'parent_item_colon' => __('Parent Product:', 'PDP'),
+        'all_items' => __('All Products', 'PDP'),
+        'add_new_item' => __('Add New Product', 'PDP'),
+        'add_new' => __('Add New', 'PDP'),
+        'new_item' => __('New Product', 'PDP'),
+        'edit_item' => __('Edit Product', 'PDP'),
+        'update_item' => __('Update Product', 'PDP'),
+        'view_item' => __('View Product', 'PDP'),
+        'view_items' => __('View Products', 'PDP'),
+        'search_items' => __('Search Products', 'PDP'),
+        'not_found' => __('Not found', 'PDP'),
+        'not_found_in_trash' => __('Not found in Trash', 'PDP'),
+        'featured_image' => __('Featured Image', 'PDP'),
+        'set_featured_image' => __('Set featured image', 'PDP'),
+        'remove_featured_image' => __('Remove featured image', 'PDP'),
+        'use_featured_image' => __('Use as featured image', 'PDP'),
+        'insert_into_item' => __('Insert into product', 'PDP'),
+        'uploaded_to_this_item' => __('Uploaded to this product', 'PDP'),
+        'items_list' => __('Products list', 'PDP'),
+        'items_list_navigation' => __('Products list navigation', 'PDP'),
+        'filter_items_list' => __('Filter products list', 'PDP'),
     );
 
     $args = array(
-        'label' => __('Product', 'textdomain'),
-        'description' => __('Custom post type for Products', 'textdomain'),
+        'label' => __('Product', 'PDP'),
+        'description' => __('Custom post type for Products', 'PDP'),
         'labels' => $labels,
         'show_in_rest' => true,
         'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
@@ -337,17 +306,17 @@ function register_product_line_taxonomy()
 {
 
     $labels = array(
-        'name' => _x('Product Lines', 'taxonomy general name', 'textdomain'),
-        'singular_name' => _x('Product Line', 'taxonomy singular name', 'textdomain'),
-        'search_items' => __('Search Product Lines', 'textdomain'),
-        'all_items' => __('All Product Lines', 'textdomain'),
-        'parent_item' => __('Parent Product Line', 'textdomain'),
-        'parent_item_colon' => __('Parent Product Line:', 'textdomain'),
-        'edit_item' => __('Edit Product Line', 'textdomain'),
-        'update_item' => __('Update Product Line', 'textdomain'),
-        'add_new_item' => __('Add New Product Line', 'textdomain'),
-        'new_item_name' => __('New Product Line Name', 'textdomain'),
-        'menu_name' => __('Product Lines', 'textdomain'),
+        'name' => _x('Product Lines', 'taxonomy general name', 'PDP'),
+        'singular_name' => _x('Product Line', 'taxonomy singular name', 'PDP'),
+        'search_items' => __('Search Product Lines', 'PDP'),
+        'all_items' => __('All Product Lines', 'PDP'),
+        'parent_item' => __('Parent Product Line', 'PDP'),
+        'parent_item_colon' => __('Parent Product Line:', 'PDP'),
+        'edit_item' => __('Edit Product Line', 'PDP'),
+        'update_item' => __('Update Product Line', 'PDP'),
+        'add_new_item' => __('Add New Product Line', 'PDP'),
+        'new_item_name' => __('New Product Line Name', 'PDP'),
+        'menu_name' => __('Product Lines', 'PDP'),
     );
 
     $args = array(
@@ -372,17 +341,17 @@ function register_product_category_taxonomy()
 {
 
     $labels = array(
-        'name' => _x('Product Categories', 'taxonomy general name', 'textdomain'),
-        'singular_name' => _x('Product Category', 'taxonomy singular name', 'textdomain'),
-        'search_items' => __('Search Product Categories', 'textdomain'),
-        'all_items' => __('All Product Categories', 'textdomain'),
-        'parent_item' => __('Parent Product Category', 'textdomain'),
-        'parent_item_colon' => __('Parent Product Category:', 'textdomain'),
-        'edit_item' => __('Edit Product Category', 'textdomain'),
-        'update_item' => __('Update Product Category', 'textdomain'),
-        'add_new_item' => __('Add New Product Category', 'textdomain'),
-        'new_item_name' => __('New Product Category Name', 'textdomain'),
-        'menu_name' => __('Product Categories', 'textdomain'),
+        'name' => _x('Product Categories', 'taxonomy general name', 'PDP'),
+        'singular_name' => _x('Product Category', 'taxonomy singular name', 'PDP'),
+        'search_items' => __('Search Product Categories', 'PDP'),
+        'all_items' => __('All Product Categories', 'PDP'),
+        'parent_item' => __('Parent Product Category', 'PDP'),
+        'parent_item_colon' => __('Parent Product Category:', 'PDP'),
+        'edit_item' => __('Edit Product Category', 'PDP'),
+        'update_item' => __('Update Product Category', 'PDP'),
+        'add_new_item' => __('Add New Product Category', 'PDP'),
+        'new_item_name' => __('New Product Category Name', 'PDP'),
+        'menu_name' => __('Product Categories', 'PDP'),
     );
 
     $args = array(
@@ -403,17 +372,17 @@ function register_product_attribute_taxonomy()
 {
 
     $labels = array(
-        'name' => _x('Product Attributes', 'taxonomy general name', 'textdomain'),
-        'singular_name' => _x('Product Attribute', 'taxonomy singular name', 'textdomain'),
-        'search_items' => __('Search Product Attributes', 'textdomain'),
-        'all_items' => __('All Product Attributes', 'textdomain'),
-        'parent_item' => __('Parent Product Attribute', 'textdomain'),
-        'parent_item_colon' => __('Parent Product Attribute:', 'textdomain'),
-        'edit_item' => __('Edit Product Attribute', 'textdomain'),
-        'update_item' => __('Update Product Attribute', 'textdomain'),
-        'add_new_item' => __('Add New Product Attribute', 'textdomain'),
-        'new_item_name' => __('New Product Attribute Name', 'textdomain'),
-        'menu_name' => __('Product Attributes', 'textdomain'),
+        'name' => _x('Product Attributes', 'taxonomy general name', 'PDP'),
+        'singular_name' => _x('Product Attribute', 'taxonomy singular name', 'PDP'),
+        'search_items' => __('Search Product Attributes', 'PDP'),
+        'all_items' => __('All Product Attributes', 'PDP'),
+        'parent_item' => __('Parent Product Attribute', 'PDP'),
+        'parent_item_colon' => __('Parent Product Attribute:', 'PDP'),
+        'edit_item' => __('Edit Product Attribute', 'PDP'),
+        'update_item' => __('Update Product Attribute', 'PDP'),
+        'add_new_item' => __('Add New Product Attribute', 'PDP'),
+        'new_item_name' => __('New Product Attribute Name', 'PDP'),
+        'menu_name' => __('Product Attributes', 'PDP'),
     );
 
     $args = array(
@@ -438,17 +407,17 @@ function register_product_market_sectors()
 {
 
     $labels = array(
-        'name' => _x('Product Market Sectors', 'taxonomy general name', 'textdomain'),
-        'singular_name' => _x('Product Market Sector', 'taxonomy singular name', 'textdomain'),
-        'search_items' => __('Search Product Market Sector', 'textdomain'),
-        'all_items' => __('All Product Market Sector', 'textdomain'),
-        'parent_item' => __('Parent Product Market Sector', 'textdomain'),
-        'parent_item_colon' => __('Parent Product Market Sector:', 'textdomain'),
-        'edit_item' => __('Edit Product Market Sector', 'textdomain'),
-        'update_item' => __('Update Product Market Sector', 'textdomain'),
-        'add_new_item' => __('Add New Product Market Sector', 'textdomain'),
-        'new_item_name' => __('New Product Market Sector Name', 'textdomain'),
-        'menu_name' => __('Product Market Sector', 'textdomain'),
+        'name' => _x('Product Market Sectors', 'taxonomy general name', 'PDP'),
+        'singular_name' => _x('Product Market Sector', 'taxonomy singular name', 'PDP'),
+        'search_items' => __('Search Product Market Sector', 'PDP'),
+        'all_items' => __('All Product Market Sector', 'PDP'),
+        'parent_item' => __('Parent Product Market Sector', 'PDP'),
+        'parent_item_colon' => __('Parent Product Market Sector:', 'PDP'),
+        'edit_item' => __('Edit Product Market Sector', 'PDP'),
+        'update_item' => __('Update Product Market Sector', 'PDP'),
+        'add_new_item' => __('Add New Product Market Sector', 'PDP'),
+        'new_item_name' => __('New Product Market Sector Name', 'PDP'),
+        'menu_name' => __('Product Market Sector', 'PDP'),
     );
 
     $args = array(
@@ -466,6 +435,583 @@ function register_product_market_sectors()
 
 }
 add_action('init', 'register_product_market_sectors');
+
+
+
+// PEOPLE POST TYPE
+
+function cptui_register_my_cpts() {
+
+	/**
+	 * Post Type: People.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "People", "PDS" ),
+		"singular_name" => esc_html__( "People", "PDS" ),
+	];
+
+	$args = [
+		"label" => esc_html__( "People", "PDS" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => false,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "people", "with_front" => true ],
+		"query_var" => true,
+		"menu_icon" => "dashicons-universal-access",
+		"supports" => [ "title", "thumbnail", "excerpt", "page-attributes" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "people", $args );
+
+	/**
+	 * Post Type: Cases Study.
+	 */
+
+	$labels = [
+		"name" => esc_html__( "Cases Study", "PDS" ),
+		"singular_name" => esc_html__( "Case", "PDS" ),
+	];
+
+	$args = [
+		"label" => esc_html__( "Cases Study", "PDS" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => true,
+		"rest_base" => "",
+		"rest_controller_class" => "WP_REST_Posts_Controller",
+		"rest_namespace" => "wp/v2",
+		"has_archive" => "case-studies",
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"delete_with_user" => false,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"can_export" => false,
+		"rewrite" => [ "slug" => "case_study", "with_front" => true ],
+		"query_var" => true,
+		"supports" => [ "title", "editor", "thumbnail", "excerpt" ],
+		"show_in_graphql" => false,
+	];
+
+	register_post_type( "case_study", $args );
+
+	/**
+	 * Post Type: Resources.
+	 * Migrado de ACF Post Types a código (2026-05-21).
+	 */
+
+	$labels = [
+		"name"                     => esc_html__( "Resources", "PDS" ),
+		"singular_name"            => esc_html__( "Resource", "PDS" ),
+		"menu_name"                => esc_html__( "Resources", "PDS" ),
+		"all_items"                => esc_html__( "All Resources", "PDS" ),
+		"edit_item"                => esc_html__( "Edit Resource", "PDS" ),
+		"view_item"                => esc_html__( "View Resource", "PDS" ),
+		"view_items"               => esc_html__( "View Resources", "PDS" ),
+		"add_new_item"             => esc_html__( "Add New Resource", "PDS" ),
+		"add_new"                  => esc_html__( "Add New Resource", "PDS" ),
+		"new_item"                 => esc_html__( "New Resource", "PDS" ),
+		"parent_item_colon"        => esc_html__( "Parent Resource:", "PDS" ),
+		"search_items"             => esc_html__( "Search Resources", "PDS" ),
+		"not_found"                => esc_html__( "No resources found", "PDS" ),
+		"not_found_in_trash"       => esc_html__( "No resources found in Trash", "PDS" ),
+		"archives"                 => esc_html__( "Resource Archives", "PDS" ),
+		"attributes"               => esc_html__( "Resource Attributes", "PDS" ),
+		"insert_into_item"         => esc_html__( "Insert into resource", "PDS" ),
+		"uploaded_to_this_item"    => esc_html__( "Uploaded to this resource", "PDS" ),
+		"filter_items_list"        => esc_html__( "Filter resources list", "PDS" ),
+		"filter_by_date"           => esc_html__( "Filter resources by date", "PDS" ),
+		"items_list_navigation"    => esc_html__( "Resources list navigation", "PDS" ),
+		"items_list"               => esc_html__( "Resources list", "PDS" ),
+		"item_published"           => esc_html__( "Resource published.", "PDS" ),
+		"item_published_privately" => esc_html__( "Resource published privately.", "PDS" ),
+		"item_reverted_to_draft"   => esc_html__( "Resource reverted to draft.", "PDS" ),
+		"item_scheduled"           => esc_html__( "Resource scheduled.", "PDS" ),
+		"item_updated"             => esc_html__( "Resource updated.", "PDS" ),
+		"item_link"                => esc_html__( "Resource Link", "PDS" ),
+		"item_link_description"    => esc_html__( "A link to a resource.", "PDS" ),
+	];
+
+	$args = [
+		"label"                => esc_html__( "Resources", "PDS" ),
+		"labels"               => $labels,
+		"description"          => "",
+		"public"               => true,
+		"publicly_queryable"   => true,
+		"show_ui"              => true,
+		"show_in_rest"         => true,
+		"rest_base"            => "",
+		"rest_controller_class"=> "WP_REST_Posts_Controller",
+		"rest_namespace"       => "wp/v2",
+		"has_archive"          => true,
+		"show_in_menu"         => true,
+		"show_in_nav_menus"    => true,
+		"show_in_admin_bar"    => true,
+		"delete_with_user"     => false,
+		"exclude_from_search"  => false,
+		"capability_type"      => "post",
+		"map_meta_cap"         => true,
+		"hierarchical"         => true,
+		"can_export"           => true,
+		"rewrite"              => [ "slug" => "resources", "with_front" => true ],
+		"query_var"            => true,
+		"menu_position"        => 5,
+		"menu_icon"            => "dashicons-rest-api",
+		"supports"             => [ "title", "author", "editor", "excerpt", "thumbnail", "custom-fields" ],
+	];
+
+	register_post_type( "resources", $args );
+
+	/**
+	 * Post Type: Market.
+	 * Migrado de ACF Post Types a código (2026-05-21).
+	 */
+	register_post_type( "market", [
+		"label"                => esc_html__( "Markets", "PDS" ),
+		"labels"               => [
+			"name"                     => esc_html__( "Markets", "PDS" ),
+			"singular_name"            => esc_html__( "Market", "PDS" ),
+			"menu_name"                => esc_html__( "Markets", "PDS" ),
+			"all_items"                => esc_html__( "All Markets", "PDS" ),
+			"edit_item"                => esc_html__( "Edit Market", "PDS" ),
+			"view_item"                => esc_html__( "View Market", "PDS" ),
+			"view_items"               => esc_html__( "View Markets", "PDS" ),
+			"add_new_item"             => esc_html__( "Add New Market", "PDS" ),
+			"add_new"                  => esc_html__( "Add New Market", "PDS" ),
+			"new_item"                 => esc_html__( "New Market", "PDS" ),
+			"parent_item_colon"        => esc_html__( "Parent Market:", "PDS" ),
+			"search_items"             => esc_html__( "Search Markets", "PDS" ),
+			"not_found"                => esc_html__( "No markets found", "PDS" ),
+			"not_found_in_trash"       => esc_html__( "No markets found in Trash", "PDS" ),
+			"archives"                 => esc_html__( "Market Archives", "PDS" ),
+			"attributes"               => esc_html__( "Market Attributes", "PDS" ),
+			"insert_into_item"         => esc_html__( "Insert into market", "PDS" ),
+			"uploaded_to_this_item"    => esc_html__( "Uploaded to this market", "PDS" ),
+			"filter_items_list"        => esc_html__( "Filter markets list", "PDS" ),
+			"filter_by_date"           => esc_html__( "Filter markets by date", "PDS" ),
+			"items_list_navigation"    => esc_html__( "Markets list navigation", "PDS" ),
+			"items_list"               => esc_html__( "Markets list", "PDS" ),
+			"item_published"           => esc_html__( "Market published.", "PDS" ),
+			"item_published_privately" => esc_html__( "Market published privately.", "PDS" ),
+			"item_reverted_to_draft"   => esc_html__( "Market reverted to draft.", "PDS" ),
+			"item_scheduled"           => esc_html__( "Market scheduled.", "PDS" ),
+			"item_updated"             => esc_html__( "Market updated.", "PDS" ),
+			"item_link"                => esc_html__( "Market Link", "PDS" ),
+			"item_link_description"    => esc_html__( "A link to a market.", "PDS" ),
+		],
+		"description"          => "",
+		"public"               => true,
+		"publicly_queryable"   => true,
+		"show_ui"              => true,
+		"show_in_rest"         => true,
+		"rest_base"            => "",
+		"rest_controller_class"=> "WP_REST_Posts_Controller",
+		"rest_namespace"       => "wp/v2",
+		"has_archive"          => false,
+		"show_in_menu"         => true,
+		"show_in_nav_menus"    => true,
+		"show_in_admin_bar"    => true,
+		"delete_with_user"     => false,
+		"exclude_from_search"  => false,
+		"capability_type"      => "post",
+		"map_meta_cap"         => true,
+		"hierarchical"         => true,
+		"can_export"           => true,
+		"rewrite"              => [ "slug" => "market", "with_front" => true ],
+		"query_var"            => true,
+		"menu_position"        => 7,
+		"menu_icon"            => "dashicons-admin-site-alt2",
+		"supports"             => [ "title", "author", "editor", "excerpt", "thumbnail", "custom-fields" ],
+	] );
+
+	/**
+	 * Post Type: Location.
+	 * Migrado de ACF Post Types a código (2026-05-21).
+	 */
+	register_post_type( "location", [
+		"label"                => esc_html__( "Locations", "PDS" ),
+		"labels"               => [
+			"name"                     => esc_html__( "Locations", "PDS" ),
+			"singular_name"            => esc_html__( "Location", "PDS" ),
+			"menu_name"                => esc_html__( "Locations", "PDS" ),
+			"all_items"                => esc_html__( "All Locations", "PDS" ),
+			"edit_item"                => esc_html__( "Edit Location", "PDS" ),
+			"view_item"                => esc_html__( "View Location", "PDS" ),
+			"view_items"               => esc_html__( "View Locations", "PDS" ),
+			"add_new_item"             => esc_html__( "Add New Location", "PDS" ),
+			"add_new"                  => esc_html__( "Add New Location", "PDS" ),
+			"new_item"                 => esc_html__( "New Location", "PDS" ),
+			"parent_item_colon"        => esc_html__( "Parent Location:", "PDS" ),
+			"search_items"             => esc_html__( "Search Locations", "PDS" ),
+			"not_found"                => esc_html__( "No locations found", "PDS" ),
+			"not_found_in_trash"       => esc_html__( "No locations found in Trash", "PDS" ),
+			"archives"                 => esc_html__( "Location Archives", "PDS" ),
+			"attributes"               => esc_html__( "Location Attributes", "PDS" ),
+			"insert_into_item"         => esc_html__( "Insert into location", "PDS" ),
+			"uploaded_to_this_item"    => esc_html__( "Uploaded to this location", "PDS" ),
+			"filter_items_list"        => esc_html__( "Filter locations list", "PDS" ),
+			"filter_by_date"           => esc_html__( "Filter locations by date", "PDS" ),
+			"items_list_navigation"    => esc_html__( "Locations list navigation", "PDS" ),
+			"items_list"               => esc_html__( "Locations list", "PDS" ),
+			"item_published"           => esc_html__( "Location published.", "PDS" ),
+			"item_published_privately" => esc_html__( "Location published privately.", "PDS" ),
+			"item_reverted_to_draft"   => esc_html__( "Location reverted to draft.", "PDS" ),
+			"item_scheduled"           => esc_html__( "Location scheduled.", "PDS" ),
+			"item_updated"             => esc_html__( "Location updated.", "PDS" ),
+			"item_link"                => esc_html__( "Location Link", "PDS" ),
+			"item_link_description"    => esc_html__( "A link to a location.", "PDS" ),
+		],
+		"description"          => "",
+		"public"               => true,
+		"publicly_queryable"   => false,
+		"show_ui"              => true,
+		"show_in_rest"         => true,
+		"rest_base"            => "",
+		"rest_controller_class"=> "WP_REST_Posts_Controller",
+		"rest_namespace"       => "wp/v2",
+		"has_archive"          => false,
+		"show_in_menu"         => true,
+		"show_in_nav_menus"    => true,
+		"show_in_admin_bar"    => true,
+		"delete_with_user"     => false,
+		"exclude_from_search"  => false,
+		"capability_type"      => "post",
+		"map_meta_cap"         => true,
+		"hierarchical"         => true,
+		"can_export"           => true,
+		"rewrite"              => [ "slug" => "location", "with_front" => true, "feeds" => true ],
+		"query_var"            => true,
+		"menu_position"        => 8,
+		"menu_icon"            => "dashicons-location-alt",
+		"supports"             => [ "title", "author", "editor", "excerpt", "thumbnail", "custom-fields" ],
+	] );
+
+	/**
+	 * Post Type: Sostenibilidad.
+	 * Migrado de ACF Post Types a código (2026-05-21).
+	 */
+	register_post_type( "sostenibilidad", [
+		"label"                => esc_html__( "Sostenibilidad", "PDS" ),
+		"labels"               => [
+			"name"                     => esc_html__( "Sostenibilidad", "PDS" ),
+			"singular_name"            => esc_html__( "Sostenibilidad", "PDS" ),
+			"menu_name"                => esc_html__( "Sostenibilidad", "PDS" ),
+			"all_items"                => esc_html__( "All Sostenibilidad", "PDS" ),
+			"edit_item"                => esc_html__( "Edit Sostenibilidad", "PDS" ),
+			"view_item"                => esc_html__( "View Sostenibilidad", "PDS" ),
+			"view_items"               => esc_html__( "View Sostenibilidad", "PDS" ),
+			"add_new_item"             => esc_html__( "Add New Sostenibilidad", "PDS" ),
+			"add_new"                  => esc_html__( "Add New Sostenibilidad", "PDS" ),
+			"new_item"                 => esc_html__( "New Sostenibilidad", "PDS" ),
+			"parent_item_colon"        => esc_html__( "Parent Sostenibilidad:", "PDS" ),
+			"search_items"             => esc_html__( "Search Sostenibilidad", "PDS" ),
+			"not_found"                => esc_html__( "No sostenibilidad found", "PDS" ),
+			"not_found_in_trash"       => esc_html__( "No sostenibilidad found in Trash", "PDS" ),
+			"archives"                 => esc_html__( "Sostenibilidad Archives", "PDS" ),
+			"attributes"               => esc_html__( "Sostenibilidad Attributes", "PDS" ),
+			"insert_into_item"         => esc_html__( "Insert into sostenibilidad", "PDS" ),
+			"uploaded_to_this_item"    => esc_html__( "Uploaded to this sostenibilidad", "PDS" ),
+			"filter_items_list"        => esc_html__( "Filter sostenibilidad list", "PDS" ),
+			"filter_by_date"           => esc_html__( "Filter sostenibilidad by date", "PDS" ),
+			"items_list_navigation"    => esc_html__( "Sostenibilidad list navigation", "PDS" ),
+			"items_list"               => esc_html__( "Sostenibilidad list", "PDS" ),
+			"item_published"           => esc_html__( "Sostenibilidad published.", "PDS" ),
+			"item_published_privately" => esc_html__( "Sostenibilidad published privately.", "PDS" ),
+			"item_reverted_to_draft"   => esc_html__( "Sostenibilidad reverted to draft.", "PDS" ),
+			"item_scheduled"           => esc_html__( "Sostenibilidad scheduled.", "PDS" ),
+			"item_updated"             => esc_html__( "Sostenibilidad updated.", "PDS" ),
+			"item_link"                => esc_html__( "Sostenibilidad Link", "PDS" ),
+			"item_link_description"    => esc_html__( "A link to a sostenibilidad.", "PDS" ),
+		],
+		"description"          => "",
+		"public"               => true,
+		"publicly_queryable"   => false,
+		"show_ui"              => true,
+		"show_in_rest"         => true,
+		"rest_base"            => "",
+		"rest_controller_class"=> "WP_REST_Posts_Controller",
+		"rest_namespace"       => "wp/v2",
+		"has_archive"          => false,
+		"show_in_menu"         => true,
+		"show_in_nav_menus"    => true,
+		"show_in_admin_bar"    => true,
+		"delete_with_user"     => false,
+		"exclude_from_search"  => false,
+		"capability_type"      => "post",
+		"map_meta_cap"         => true,
+		"hierarchical"         => false,
+		"can_export"           => true,
+		"rewrite"              => [ "slug" => "sostenibilidad", "with_front" => true ],
+		"query_var"            => true,
+		"menu_icon"            => "dashicons-admin-site-alt2",
+		"supports"             => [ "title", "editor", "thumbnail", "custom-fields" ],
+	] );
+
+	/**
+	 * Post Type: Event.
+	 * Migrado de ACF Post Types a código (2026-05-21).
+	 */
+	register_post_type( "event", [
+		"label"                => esc_html__( "Events", "PDS" ),
+		"labels"               => [
+			"name"                     => esc_html__( "Events", "PDS" ),
+			"singular_name"            => esc_html__( "Event", "PDS" ),
+			"menu_name"                => esc_html__( "Events", "PDS" ),
+			"all_items"                => esc_html__( "All Events", "PDS" ),
+			"edit_item"                => esc_html__( "Edit Event", "PDS" ),
+			"view_item"                => esc_html__( "View Event", "PDS" ),
+			"view_items"               => esc_html__( "View Events", "PDS" ),
+			"add_new_item"             => esc_html__( "Add New Event", "PDS" ),
+			"add_new"                  => esc_html__( "Add New Event", "PDS" ),
+			"new_item"                 => esc_html__( "New Event", "PDS" ),
+			"parent_item_colon"        => esc_html__( "Parent Event:", "PDS" ),
+			"search_items"             => esc_html__( "Search Events", "PDS" ),
+			"not_found"                => esc_html__( "No events found", "PDS" ),
+			"not_found_in_trash"       => esc_html__( "No events found in Trash", "PDS" ),
+			"archives"                 => esc_html__( "Event Archives", "PDS" ),
+			"attributes"               => esc_html__( "Event Attributes", "PDS" ),
+			"insert_into_item"         => esc_html__( "Insert into event", "PDS" ),
+			"uploaded_to_this_item"    => esc_html__( "Uploaded to this event", "PDS" ),
+			"filter_items_list"        => esc_html__( "Filter events list", "PDS" ),
+			"filter_by_date"           => esc_html__( "Filter events by date", "PDS" ),
+			"items_list_navigation"    => esc_html__( "Events list navigation", "PDS" ),
+			"items_list"               => esc_html__( "Events list", "PDS" ),
+			"item_published"           => esc_html__( "Event published.", "PDS" ),
+			"item_published_privately" => esc_html__( "Event published privately.", "PDS" ),
+			"item_reverted_to_draft"   => esc_html__( "Event reverted to draft.", "PDS" ),
+			"item_scheduled"           => esc_html__( "Event scheduled.", "PDS" ),
+			"item_updated"             => esc_html__( "Event updated.", "PDS" ),
+			"item_link"                => esc_html__( "Event Link", "PDS" ),
+			"item_link_description"    => esc_html__( "A link to an event.", "PDS" ),
+		],
+		"description"          => "",
+		"public"               => true,
+		"publicly_queryable"   => true,
+		"show_ui"              => true,
+		"show_in_rest"         => true,
+		"rest_base"            => "",
+		"rest_controller_class"=> "WP_REST_Posts_Controller",
+		"rest_namespace"       => "wp/v2",
+		"has_archive"          => false,
+		"show_in_menu"         => true,
+		"show_in_nav_menus"    => true,
+		"show_in_admin_bar"    => true,
+		"delete_with_user"     => false,
+		"exclude_from_search"  => false,
+		"capability_type"      => "post",
+		"map_meta_cap"         => true,
+		"hierarchical"         => true,
+		"can_export"           => true,
+		"rewrite"              => [ "slug" => "event", "with_front" => true ],
+		"query_var"            => true,
+		"menu_position"        => 5,
+		"menu_icon"            => "dashicons-megaphone",
+		"supports"             => [ "title", "author", "editor", "excerpt", "thumbnail", "custom-fields" ],
+	] );
+}
+
+add_action( 'init', 'cptui_register_my_cpts' );
+
+/* TAXONOMÍAS: Countries, Department, Markets */
+
+function pds_register_taxonomies() {
+
+	/**
+	 * Taxonomy: Countries.
+	 */
+	register_taxonomy( "countries", [ "location" ], [
+		"label"               => esc_html__( "Countries", "PDS" ),
+		"labels"              => [
+			"name"          => esc_html__( "Countries", "PDS" ),
+			"singular_name" => esc_html__( "Country", "PDS" ),
+		],
+		"public"              => true,
+		"publicly_queryable"  => true,
+		"hierarchical"        => false,
+		"show_ui"             => true,
+		"show_in_menu"        => true,
+		"show_in_nav_menus"   => true,
+		"query_var"           => true,
+		"rewrite"             => [ 'slug' => 'countries', 'with_front' => true ],
+		"show_admin_column"   => false,
+		"show_in_rest"        => true,
+		"show_tagcloud"       => false,
+		"rest_base"           => "countries",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace"      => "wp/v2",
+		"show_in_quick_edit"  => false,
+		"sort"                => false,
+	] );
+
+	/**
+	 * Taxonomy: Department.
+	 */
+	register_taxonomy( "department", [ "case_study" ], [
+		"label"               => esc_html__( "Departments", "PDS" ),
+		"labels"              => [
+			"name"          => esc_html__( "Departments", "PDS" ),
+			"singular_name" => esc_html__( "Department", "PDS" ),
+		],
+		"public"              => true,
+		"publicly_queryable"  => true,
+		"hierarchical"        => true,
+		"show_ui"             => true,
+		"show_in_menu"        => true,
+		"show_in_nav_menus"   => true,
+		"query_var"           => true,
+		"rewrite"             => [ 'slug' => 'department', 'with_front' => true, 'hierarchical' => true ],
+		"show_admin_column"   => false,
+		"show_in_rest"        => true,
+		"show_tagcloud"       => false,
+		"rest_base"           => "department",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace"      => "wp/v2",
+		"show_in_quick_edit"  => true,
+		"sort"                => true,
+	] );
+
+	/**
+	 * Taxonomy: Market Sectors.
+	 * Migrada de ACF Taxonomies a código (2026-05-21).
+	 */
+	register_taxonomy( "market-sector", [ "market", "product" ], [
+		"label"               => esc_html__( "Market Sectors", "PDS" ),
+		"labels"              => [
+			"name"              => esc_html__( "Market Sectors", "PDS" ),
+			"singular_name"     => esc_html__( "Market Sector", "PDS" ),
+			"menu_name"         => esc_html__( "Market Sectors", "PDS" ),
+			"all_items"         => esc_html__( "All Market Sectors", "PDS" ),
+			"edit_item"         => esc_html__( "Edit Market Sector", "PDS" ),
+			"view_item"         => esc_html__( "View Market Sector", "PDS" ),
+			"update_item"       => esc_html__( "Update Market Sector", "PDS" ),
+			"add_new_item"      => esc_html__( "Add New Market Sector", "PDS" ),
+			"new_item_name"     => esc_html__( "New Market Sector Name", "PDS" ),
+			"parent_item"       => esc_html__( "Parent Market Sector", "PDS" ),
+			"parent_item_colon" => esc_html__( "Parent Market Sector:", "PDS" ),
+			"search_items"      => esc_html__( "Search Market Sectors", "PDS" ),
+			"not_found"         => esc_html__( "No market sector found", "PDS" ),
+			"no_terms"          => esc_html__( "No market sectors", "PDS" ),
+			"filter_by_item"    => esc_html__( "Filter by market sector", "PDS" ),
+			"items_list_navigation" => esc_html__( "Market Sector list navigation", "PDS" ),
+			"items_list"        => esc_html__( "Market Sector list", "PDS" ),
+			"back_to_items"     => esc_html__( "← Go to market sectors", "PDS" ),
+			"item_link"         => esc_html__( "Market Sector Link", "PDS" ),
+			"item_link_description" => esc_html__( "A link to a market sector", "PDS" ),
+		],
+		"public"              => true,
+		"publicly_queryable"  => true,
+		"hierarchical"        => true,
+		"show_ui"             => true,
+		"show_in_menu"        => true,
+		"show_in_nav_menus"   => true,
+		"query_var"           => true,
+		"rewrite"             => [ 'slug' => 'market-sector', 'with_front' => true, 'hierarchical' => true ],
+		"show_admin_column"   => true,
+		"show_in_rest"        => true,
+		"show_tagcloud"       => true,
+		"rest_base"           => "market-sector",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace"      => "wp/v2",
+		"show_in_quick_edit"  => true,
+		"sort"                => false,
+	] );
+
+	/**
+	 * Taxonomy: Download Category.
+	 * Migrada de ACF Taxonomies a código (2026-05-21).
+	 */
+	register_taxonomy( "download-category", [ "resources" ], [
+		"label"               => esc_html__( "Downloads Categories", "PDS" ),
+		"labels"              => [
+			"name"              => esc_html__( "Downloads Categories", "PDS" ),
+			"singular_name"     => esc_html__( "Download Category", "PDS" ),
+			"menu_name"         => esc_html__( "Downloads", "PDS" ),
+			"all_items"         => esc_html__( "All Download Categories", "PDS" ),
+			"edit_item"         => esc_html__( "Edit Download Category", "PDS" ),
+			"view_item"         => esc_html__( "View Download Category", "PDS" ),
+			"update_item"       => esc_html__( "Update Download Category", "PDS" ),
+			"add_new_item"      => esc_html__( "Add New Download Category", "PDS" ),
+			"new_item_name"     => esc_html__( "New Download Category Name", "PDS" ),
+			"parent_item"       => esc_html__( "Parent Download Category", "PDS" ),
+			"parent_item_colon" => esc_html__( "Parent Download Category:", "PDS" ),
+			"search_items"      => esc_html__( "Search Download Categories", "PDS" ),
+			"not_found"         => esc_html__( "No download categories found", "PDS" ),
+			"no_terms"          => esc_html__( "No download categories", "PDS" ),
+			"filter_by_item"    => esc_html__( "Filter by download category", "PDS" ),
+			"items_list_navigation" => esc_html__( "Download categories list navigation", "PDS" ),
+			"items_list"        => esc_html__( "Download categories list", "PDS" ),
+			"back_to_items"     => esc_html__( "← Go to download categories", "PDS" ),
+			"item_link"         => esc_html__( "Download Category Link", "PDS" ),
+			"item_link_description" => esc_html__( "A link to a download category", "PDS" ),
+		],
+		"public"              => true,
+		"publicly_queryable"  => false,
+		"hierarchical"        => true,
+		"show_ui"             => true,
+		"show_in_menu"        => true,
+		"show_in_nav_menus"   => true,
+		"query_var"           => true,
+		"rewrite"             => [ 'slug' => 'download-category', 'with_front' => true, 'hierarchical' => false ],
+		"show_admin_column"   => true,
+		"show_in_rest"        => true,
+		"show_tagcloud"       => true,
+		"rest_base"           => "download-category",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace"      => "wp/v2",
+		"show_in_quick_edit"  => true,
+		"sort"                => false,
+	] );
+
+	/**
+	 * Taxonomy: Markets.
+	 */
+	register_taxonomy( "market", [ "post", "page" ], [
+		"label"               => esc_html__( "Markets", "PDS" ),
+		"labels"              => [
+			"name"          => esc_html__( "Markets", "PDS" ),
+			"singular_name" => esc_html__( "Market", "PDS" ),
+		],
+		"public"              => true,
+		"publicly_queryable"  => true,
+		"hierarchical"        => true,
+		"show_ui"             => true,
+		"show_in_menu"        => true,
+		"show_in_nav_menus"   => true,
+		"query_var"           => true,
+		"rewrite"             => [ 'slug' => 'market', 'with_front' => true ],
+		"show_admin_column"   => true,
+		"show_in_rest"        => true,
+		"show_tagcloud"       => false,
+		"rest_base"           => "market",
+		"rest_controller_class" => "WP_REST_Terms_Controller",
+		"rest_namespace"      => "wp/v2",
+		"show_in_quick_edit"  => true,
+		"sort"                => true,
+	] );
+}
+add_action( 'init', 'pds_register_taxonomies' );
 
 
 
@@ -715,7 +1261,7 @@ add_action('wp_footer', 'show_template');
 
 /* EDIT PAGE */
 
-edit_post_link( __( 'Editar', 'textdomain' ), '<p>', '</p>', null, 'btn btn-primary btn-edit-post-link' );
+edit_post_link( __( 'Editar', 'PDP' ), '<p>', '</p>', null, 'btn btn-primary btn-edit-post-link' );
 add_filter('the_content', 'mycontent');
 add_filter('avf_template_builder_content', 'mycontent');
 

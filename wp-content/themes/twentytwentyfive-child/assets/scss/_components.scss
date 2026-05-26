@@ -651,6 +651,21 @@
     }
 
   }
+
+  .wp-block-buttons {
+
+    .has-accent-1-background-color,
+    .has-accent-2-background-color,
+    .has-accent-3-background-color,
+    .has-accent-4-background-color,
+    .has-accent-5-background-color,
+    .has-accent-6-background-color,
+    .has-contrast-background-color,
+    .has-base-background-color {
+      opacity: 1 !important;
+    }
+  }
+
 }
 
 .markets {

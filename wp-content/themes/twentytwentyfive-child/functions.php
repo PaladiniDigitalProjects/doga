@@ -76,6 +76,14 @@ function prefix_register_block_styles() {
 		)
 	);
 
+    register_block_style(
+		array( 'core/button' ),
+		array(
+			'name'         => 'button-icon-right-bottom',
+			'label'        => __( 'Icon Right Bottom', 'PDS' ),
+		)
+	);
+
 	register_block_style(
 		array( 'core/button' ),
 		array(

@@ -157,16 +157,6 @@ figcaption {
 
 /* GRIDS */
 
-// .is-layout-grid {
-//   grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-//   @include mobile {
-//     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-//   }
-//   @include tablet {
-//     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-//   }
-// }
-
 .wp-block-columns {
   &.alignfull {
     margin: 0 1.5rem;
@@ -1037,4 +1027,116 @@ figcaption {
 
 .wp-block-media-text {
   overflow: clip;
+}
+
+/* BUTTONS */
+
+.wp-swiper {
+  .swiper-pagination-bullets {
+    text-align: right;
+    bottom: 0;
+
+    .swiper-pagination-bullet-active {
+      background-color: $CTA !important;
+    }
+  }
+}
+
+.product-list {
+  .product {
+    a {
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    ul {
+      padding-left: 1.1rem;
+    }
+  }
+}
+
+/* CASE STUDY */
+
+.case_study {
+  .wp-block-cover {
+    .wp-block-post-excerpt__excerpt {
+      transition: 0.5s;
+      opacity: 0;
+      height: 0;
+    }
+
+    &:hover {
+      a {
+        text-decoration: none;
+      }
+
+      .wp-block-post-excerpt__excerpt {
+        opacity: 1;
+        height: auto;
+      }
+    }
+  }
+}
+
+
+
+/* APERTURA */
+
+.apertura {
+  position: relative;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+
+
+  .wp-block-cover__inner-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: auto !important;
+  }
+
+  .max300 {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+
+  .wp-block-buttons {
+    padding: 0;
+
+    .wp-block-button {
+      min-width: 8rem !important;
+      padding: 0;
+    }
+  }
+}
+
+/* LLISTATS DE PRODUCTES */
+
+.wp-block-post-featured-image {
+  margin-left: 0;
+  margin-right: 0;
+  background-color: $white;
+}
+
+.wp-block-query {
+  .wp-block-cover {
+    &.market {
+
+      .has-accent-1-background-color,
+      .has-accent-2-background-color,
+      .has-accent-3-background-color,
+      .has-accent-4-background-color,
+      .has-accent-5-background-color,
+      .has-accent-6-background-color,
+      .has-contrast-background-color,
+      .has-base-background-color {
+        opacity: 1 !important;
+      }
+    }
+  }
 }

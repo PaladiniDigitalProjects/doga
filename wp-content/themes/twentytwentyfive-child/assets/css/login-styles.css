@@ -929,6 +929,82 @@ figcaption.wp-element-caption strong {
   overflow: clip;
 }
 
+/* BUTTONS */
+.wp-swiper .swiper-pagination-bullets {
+  text-align: right;
+  bottom: 0;
+}
+.wp-swiper .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  background-color: #BF0811 !important;
+}
+
+.product-list .product a {
+  text-decoration: none;
+}
+.product-list .product a:hover {
+  text-decoration: none;
+}
+.product-list .product ul {
+  padding-left: 1.1rem;
+}
+
+/* CASE STUDY */
+.case_study .wp-block-cover .wp-block-post-excerpt__excerpt {
+  transition: 0.5s;
+  opacity: 0;
+  height: 0;
+}
+.case_study .wp-block-cover:hover a {
+  text-decoration: none;
+}
+.case_study .wp-block-cover:hover .wp-block-post-excerpt__excerpt {
+  opacity: 1;
+  height: auto;
+}
+
+/* APERTURA */
+.apertura {
+  position: relative;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+}
+.apertura .wp-block-cover__inner-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: auto !important;
+}
+.apertura .max300 {
+  width: 100%;
+  max-width: 100% !important;
+}
+.apertura .wp-block-buttons {
+  padding: 0;
+}
+.apertura .wp-block-buttons .wp-block-button {
+  min-width: 8rem !important;
+  padding: 0;
+}
+
+/* LLISTATS DE PRODUCTES */
+.wp-block-post-featured-image {
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #ffffff;
+}
+
+.wp-block-query .wp-block-cover.market .has-accent-1-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-2-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-3-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-4-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-5-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-6-background-color,
+.wp-block-query .wp-block-cover.market .has-contrast-background-color,
+.wp-block-query .wp-block-cover.market .has-base-background-color {
+  opacity: 1 !important;
+}
+
 .wpforms-container {
   background-color: #ffffff;
   width: 100%;

@@ -929,6 +929,82 @@ figcaption.wp-element-caption strong {
   overflow: clip;
 }
 
+/* BUTTONS */
+.wp-swiper .swiper-pagination-bullets {
+  text-align: right;
+  bottom: 0;
+}
+.wp-swiper .swiper-pagination-bullets .swiper-pagination-bullet-active {
+  background-color: #BF0811 !important;
+}
+
+.product-list .product a {
+  text-decoration: none;
+}
+.product-list .product a:hover {
+  text-decoration: none;
+}
+.product-list .product ul {
+  padding-left: 1.1rem;
+}
+
+/* CASE STUDY */
+.case_study .wp-block-cover .wp-block-post-excerpt__excerpt {
+  transition: 0.5s;
+  opacity: 0;
+  height: 0;
+}
+.case_study .wp-block-cover:hover a {
+  text-decoration: none;
+}
+.case_study .wp-block-cover:hover .wp-block-post-excerpt__excerpt {
+  opacity: 1;
+  height: auto;
+}
+
+/* APERTURA */
+.apertura {
+  position: relative;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 0 !important;
+}
+.apertura .wp-block-cover__inner-container {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: auto !important;
+}
+.apertura .max300 {
+  width: 100%;
+  max-width: 100% !important;
+}
+.apertura .wp-block-buttons {
+  padding: 0;
+}
+.apertura .wp-block-buttons .wp-block-button {
+  min-width: 8rem !important;
+  padding: 0;
+}
+
+/* LLISTATS DE PRODUCTES */
+.wp-block-post-featured-image {
+  margin-left: 0;
+  margin-right: 0;
+  background-color: #ffffff;
+}
+
+.wp-block-query .wp-block-cover.market .has-accent-1-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-2-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-3-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-4-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-5-background-color,
+.wp-block-query .wp-block-cover.market .has-accent-6-background-color,
+.wp-block-query .wp-block-cover.market .has-contrast-background-color,
+.wp-block-query .wp-block-cover.market .has-base-background-color {
+  opacity: 1 !important;
+}
+
 header.wp-block-template-part {
   padding: 0 1rem;
   width: calc(100% - 2rem);
@@ -987,17 +1063,17 @@ header.wp-block-template-part .wp-block-buttons {
   position: relative;
 }
 .is-style-button-icon-right > a {
-  padding-right: 3.4rem;
+  padding-right: 3.4rem !important;
 }
 .is-style-button-icon-right > a:after {
   position: absolute;
   top: calc(50% - 0.7rem);
   bottom: calc(50% - 0.7rem);
-  right: 1.4rem;
+  right: 0.8rem;
   content: " ";
   display: inline-block;
-  width: 1.6rem;
-  height: 1.4rem;
+  width: 1.5rem;
+  height: 1.35rem;
   background-size: cover;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyNCAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjU1MSAyMS41TDExLjc1NTEgMTkuNzE4N0wxOS4xNDg3IDEyLjI4OTFIMFY5LjcxMDk0SDE5LjE0ODdMMTEuNzU1MSAyLjMwNDY5TDEzLjU1MSAwLjVMMjQgMTFMMTMuNTUxIDIxLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
 }
@@ -1009,17 +1085,17 @@ header.wp-block-template-part .wp-block-buttons {
   position: relative;
 }
 .is-style-button-icon-left > a {
-  padding-left: 3.4rem;
+  padding-left: 3.4rem !important;
 }
 .is-style-button-icon-left > a:before {
   position: absolute;
   top: calc(50% - 0.7rem);
   bottom: calc(50% - 0.7rem);
-  left: 1.4rem;
+  left: 1.8rem;
   content: " ";
   display: block;
-  width: 1.6rem;
-  height: 1.4rem;
+  width: 1.5rem;
+  height: 1.35rem;
   background-size: cover;
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyNCAyMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwLjQ0OSAyLjEzMjI3ZS0wNkwxMi4yNDQ5IDEuNzgxMjVMNC44NTEzMSA5LjIxMDk0TDI0IDkuMjEwOTRMMjQgMTEuNzg5MUw0Ljg1MTMxIDExLjc4OTFMMTIuMjQ0OSAxOS4xOTUzTDEwLjQ0OSAyMUwtMS44ODg2NGUtMDYgMTAuNUwxMC40NDkgMi4xMzIyN2UtMDZaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
 }
@@ -1028,13 +1104,33 @@ header.wp-block-template-part .wp-block-buttons {
 }
 
 .is-style-button-tag > a {
-  font-size: 0.75rem;
+  font-size: 1.2rem !important;
   line-height: 100%;
-  padding: 0.35rem 0.5rem !important;
-  background-color: #8194AD;
-  color: #ffffff;
-  font-weight: normal;
-  letter-spacing: 0.025rem;
+  padding: 0.75rem 1rem 0.7rem 1rem !important;
+  font-weight: bold !important;
+}
+
+.is-style-button-icon-right-bottom {
+  position: relative;
+}
+.is-style-button-icon-right-bottom > a {
+  padding-right: 3.4rem !important;
+}
+.is-style-button-icon-right-bottom > a:after {
+  position: absolute;
+  top: calc(50% - 0.7rem);
+  bottom: calc(50% - 0.7rem);
+  right: 0.8rem;
+  content: " ";
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.35rem;
+  background-size: cover;
+  transform: rotate(90deg);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyNCAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjU1MSAyMS41TDExLjc1NTEgMTkuNzE4N0wxOS4xNDg3IDEyLjI4OTFIMFY5LjcxMDk0SDE5LjE0ODdMMTEuNzU1MSAyLjMwNDY5TDEzLjU1MSAwLjVMMjQgMTFMMTMuNTUxIDIxLjVaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
+}
+.is-style-button-icon-right-bottom > a.has-contrast-color:after {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyNCAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjU1MSAyMS41TDExLjc1NTEgMTkuNzE4N0wxOS4xNDg3IDEyLjI4OTFIMFY5LjcxMDk0SDE5LjE0ODdMMTEuNzU1MSAyLjMwNDY5TDEzLjU1MSAwLjVMMjQgMTFMMTMuNTUxIDIxLjVaIiBmaWxsPSIjMzQzNDM0Ii8+Cjwvc3ZnPgo=");
 }
 
 /*!
@@ -3152,334 +3248,6 @@ body.active .menu-content {
   content: "-";
 }
 
-.nutrities p {
-  padding-right: 0 !important;
-}
-.nutrities .col_apertura {
-  position: relative;
-}
-.nutrities .col_apertura .wp-block-column {
-  order: 1;
-}
-.nutrities .col_apertura .wp-block-column:first-child {
-  order: 2;
-}
-.nutrities .col_apertura .wp-block-column:last-child {
-  order: 3;
-}
-@media only screen and (min-width: 768px) {
-  .nutrities .col_apertura .wp-block-column {
-    order: 2;
-  }
-  .nutrities .col_apertura .wp-block-column:first-child {
-    order: 1;
-  }
-  .nutrities .col_apertura .wp-block-column:last-child {
-    order: 3;
-  }
-}
-.nutrities h1.wp-block-post-title {
-  line-height: 120%;
-  margin-bottom: 1rem;
-}
-.nutrities h6.antetitol {
-  border-radius: 3px;
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 0.2rem;
-  margin-bottom: 2rem;
-}
-.nutrities h6.antetitol.has-background {
-  padding: 0.7rem 1rem 0.5rem 1rem;
-}
-.nutrities .logo-apertura {
-  width: 100%;
-  height: auto;
-  max-width: 26rem;
-  position: absolute;
-  top: 4rem;
-}
-.nutrities .noi {
-  line-height: 0;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-.nutrities .wp-block-buttons.secciones {
-  position: inherit;
-  flex-direction: column;
-  background-color: #F9F8FF;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button {
-  width: calc(100% - 4rem);
-  position: relative;
-  z-index: 11;
-  transition: 0.35s;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button:hover {
-  cursor: pointer;
-  scale: 110%;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button .wp-block-button__link {
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  text-align: left;
-  padding: 0 12rem 0 2rem;
-  line-height: 120%;
-  height: 10rem;
-  border-radius: 0.5rem 5rem 5rem 0.5rem !important;
-  letter-spacing: 0;
-  font-size: 2.2rem !important;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button:before {
-  content: " ";
-  width: 8rem;
-  height: 8rem;
-  position: absolute;
-  display: block;
-  top: 1rem;
-  right: 1.5rem;
-  border-radius: 4rem;
-  background: url("../img/Recetas.svg") center no-repeat;
-  background-size: 100%;
-  z-index: 1;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button:first-child:before {
-  background: url("../img/Capsulas.svg") center no-repeat;
-  background-size: 100%;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button:last-child {
-  margin-right: 0;
-}
-.nutrities .wp-block-buttons.secciones .wp-block-button:last-child:before {
-  background: url("../img/Cocina.svg") center no-repeat;
-  background-size: 100%;
-}
-@media only screen and (min-width: 1024px) {
-  .nutrities .wp-block-buttons.secciones .wp-block-button {
-    margin-right: 2rem;
-    width: calc(33.33% - 8rem);
-  }
-}
-@media only screen and (min-width: 1024px) {
-  .nutrities .wp-block-buttons.secciones {
-    background-color: transparent;
-    z-index: 111;
-    margin: -7rem auto -6rem !important;
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-  .nutrities .wp-block-buttons.secciones.colum {
-    flex-direction: column !important;
-  }
-}
-.nutrities .wp-block-buttons.secciones.is-vertical {
-  position: relative;
-  margin: 0 !important;
-}
-.nutrities .wp-block-buttons.secciones.is-vertical .wp-block-button {
-  margin: 0 0 2rem 0;
-  width: 100%;
-}
-.nutrities .wp-block-buttons.secciones.is-vertical .wp-block-button .wp-block-button__link {
-  text-align: left;
-  padding: 0 2rem 0 11rem;
-  border-radius: 5rem 0.5rem 0.5rem 5rem !important;
-}
-.nutrities .wp-block-buttons.secciones.is-vertical .wp-block-button:before {
-  left: 1.5rem;
-}
-.nutrities .sponsors {
-  margin: 4rem 0;
-  border-radius: 1rem;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
-  padding: 2rem 4rem;
-}
-.nutrities .sponsors img {
-  width: 100%;
-  height: auto;
-}
-.nutrities .sponsors.minH {
-  min-height: 39.5rem;
-}
-.nutrities img {
-  width: 100%;
-  max-width: 100%;
-}
-.nutrities .listado-recetas ul {
-  margin: 0;
-  padding: 0;
-  display: grid;
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
-  row-gap: 2rem;
-  grid-template-columns: auto auto auto;
-}
-.nutrities .listado-recetas ul li {
-  list-style-type: none;
-  margin: 1rem;
-  background-color: #a6bb00;
-  border-radius: 1rem;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
-  transition: 0.25ms;
-}
-.nutrities .listado-recetas ul li img {
-  border-radius: 1rem 1rem 0 0 !important;
-  height: 280px;
-}
-.nutrities .listado-recetas ul li h2 {
-  padding: 2rem 1.5rem !important;
-  border-radius: 0 0 1rem 1rem;
-  background-color: #a6bb00;
-}
-.nutrities .listado-recetas ul li h2 > a {
-  font-size: 2rem !important;
-  color: #ffffff;
-}
-.nutrities .listado-recetas ul li:hover {
-  transform: scale(110%);
-}
-.nutrities .listado-recetas.utensilios ul li h2 {
-  background-color: #FFAA00;
-}
-.nutrities h1 {
-  font-size: 4rem !important;
-  color: #9c9c9c !important;
-  letter-spacing: 0.05rem;
-}
-.nutrities .ingredientes {
-  margin: 1.5rem;
-  border-radius: 1rem;
-  background-color: #eaede8;
-}
-.nutrities .ingredientes:not(:first-child) {
-  margin-left: 1.5rem !important;
-}
-.nutrities .ingredientes .featured > img {
-  border-radius: 1rem;
-}
-.nutrities .ingredientes .wp-block-heading {
-  color: #9c9c9c;
-  font-size: 2.4rem !important;
-  width: calc(100% - 4rem);
-  margin: 2rem 2rem 0 2rem;
-}
-.nutrities .ingredientes ul.wp-block-list {
-  margin: 0 2rem;
-  width: calc(100% - 4rem);
-  color: #9c9c9c;
-}
-.nutrities .ingredientes ul.wp-block-list li {
-  font-size: 2rem;
-}
-.nutrities .ingredientes ul.wp-block-list li::marker {
-  color: #0d3b5d !important;
-}
-.nutrities .ingredientes .wp-block-group {
-  width: 100%;
-  padding: 2rem 2rem 0 2rem;
-}
-.nutrities .ingredientes .wp-block-group .btn-descargar {
-  margin: 2rem auto;
-  transition: 0.35s;
-}
-.nutrities .ingredientes .wp-block-group .btn-descargar:hover {
-  transform: scale(110%);
-}
-.nutrities .ingredientes .wp-block-buttons {
-  margin: 2rem 2rem 0 2rem;
-}
-.nutrities .pasopaso {
-  margin: 1.5rem;
-  background-color: #eaede8;
-  padding: 2rem;
-  border-radius: 1rem;
-}
-.nutrities .pasopaso h1 {
-  font-size: 4rem !important;
-  color: #0d3b5d;
-  letter-spacing: 0.05rem;
-  max-width: 440px;
-  margin-left: 2rem;
-}
-.nutrities .pasopaso .wp-block-heading {
-  color: #9c9c9c !important;
-  font-size: 2.4rem !important;
-  width: calc(100% - 4rem);
-  margin: 4rem 2rem 0rem 2rem;
-}
-.nutrities .pasopaso ul li, .nutrities .pasopaso ol li {
-  font-size: 2rem;
-}
-.nutrities .pasopaso ul li::before, .nutrities .pasopaso ol li::before {
-  color: #0d3b5d;
-}
-.nutrities .pasopaso .ico-pasopaso {
-  width: 100%;
-  text-align: left;
-  justify-content: flex-start;
-  -moz-column-gap: 3rem;
-       column-gap: 3rem;
-  padding: 0 2rem;
-}
-.nutrities .pasopaso .ico-pasopaso figure {
-  width: 30%;
-}
-.nutrities .pasopaso .ico-pasopaso .wp-block-group {
-  width: 70%;
-}
-@media only screen and (min-width: 768px) {
-  .nutrities .pasopaso {
-    margin-left: 0;
-  }
-}
-.nutrities .relacionados .wp-block-heading {
-  color: #0d3b5d !important;
-  font-size: 2.4rem !important;
-  padding-left: 1rem;
-  margin-bottom: 2rem;
-}
-.nutrities .relacionados .wp-block-post {
-  color: #ffffff !important;
-  font-size: 2.4rem !important;
-  letter-spacing: 0.05rem;
-  background-color: #a6bb00;
-}
-.nutrities .capsulaFormativa {
-  border-radius: 1rem;
-  background-color: #ffffff;
-}
-.nutrities .capsulaFormativa .wp-block-heading {
-  padding: 0;
-  margin: 0;
-  color: #0d3b5d;
-}
-.nutrities .capsulaFormativa p {
-  padding: 0;
-  margin: 0;
-  color: #9c9c9c;
-}
-.nutrities .capsulaFormativa .wp-block-group.is-vertical {
-  margin: 2rem !important;
-}
-.nutrities .wp-block-ghub-tab-button > p {
-  padding-bottom: 0 !important;
-}
-
-.ColumnRight .wp-block-column:first-child {
-  order: 2;
-}
-.ColumnRight .wp-block-column:last-child {
-  order: 1;
-}
-@media only screen and (min-width: 1024px) {
-  .ColumnRight .wp-block-column:first-child {
-    order: 1;
-  }
-  .ColumnRight .wp-block-column:last-child {
-    order: 2;
-  }
-}
-
 /* SJD TABS */
 .tabs-banner {
   position: relative;
@@ -3953,10 +3721,24 @@ body.active .menu-content {
   font-size: 1rem;
 }
 /* MARKET */
-.market .has-accent-2-background-color {
-  opacity: 0.2 !important;
+.market .has-accent-1-background-color,
+.market .has-accent-2-background-color,
+.market .has-accent-3-background-color,
+.market .has-accent-4-background-color,
+.market .has-accent-5-background-color,
+.market .has-accent-6-background-color,
+.market .has-contrast-background-color,
+.market .has-base-background-color {
+  opacity: 0.35 !important;
   transition: all 350ms ease;
   -webkit-transition: all 350ms ease;
+}
+.market p {
+  opacity: 0;
+  transition: 0.35s;
+  height: 0 !important;
+  padding-bottom: 0 !important;
+  margin-block-start: 0 !important;
 }
 .market:hover .wp-block-cover__image-background {
   transform: scale(110%);
@@ -3967,8 +3749,21 @@ body.active .menu-content {
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
 }
-.market:hover .has-accent-2-background-color {
-  opacity: 0.6 !important;
+.market:hover .has-accent-1-background-color,
+.market:hover .has-accent-2-background-color,
+.market:hover .has-accent-3-background-color,
+.market:hover .has-accent-4-background-color,
+.market:hover .has-accent-5-background-color,
+.market:hover .has-accent-6-background-color,
+.market:hover .has-contrast-background-color,
+.market:hover .has-base-background-color {
+  opacity: 0.75 !important;
+}
+.market:hover p {
+  opacity: 1;
+  height: inherit !important;
+  padding: 0.5rem 0 !important;
+  line-height: 140% !important;
 }
 
 .markets .wp-block-cover {
@@ -4033,7 +3828,6 @@ body.active .menu-content {
   z-index: 999999;
 }
 
-/* BANNER SECTOR */
 .tribe-events-widget-events-list__events {
   display: flex !important;
   flex-direction: column !important;

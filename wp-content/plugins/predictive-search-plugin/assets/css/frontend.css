@@ -1,0 +1,330 @@
+/* ═══════════════════════════════════════════════════════════
+   Predictive Search — Frontend
+   Colores DOGA: navy #0A3A5E · mid-blue #1D669D · slate #465466
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Trigger (lupa) ─────────────────────────────────────── */
+
+.ps-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: inherit;
+    transition: color 0.2s;
+}
+
+.ps-trigger:hover,
+.ps-trigger:focus-visible {
+    color: #1D669D;
+    outline: none;
+}
+
+/* ── Overlay backdrop ───────────────────────────────────── */
+
+.ps-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* [hidden] tiene la misma especificidad que .ps-overlay — forzamos con !important */
+.ps-overlay[hidden] {
+    display: none !important;
+}
+
+.ps-overlay__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 58, 94, 0.65);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.ps-overlay.is-open .ps-overlay__backdrop {
+    opacity: 1;
+}
+
+/* ── Overlay panel ──────────────────────────────────────── */
+
+.ps-overlay__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 900px;
+    margin: 60px 20px 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    transform: translateY(-16px);
+    opacity: 0;
+    transition: transform 0.28s ease, opacity 0.28s ease;
+
+    @media (max-width: 640px) {
+        margin: 0;
+        border-radius: 0;
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.ps-overlay.is-open .ps-overlay__panel {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ── Header (input row) ─────────────────────────────────── */
+
+.ps-overlay__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eef1f5;
+}
+
+.ps-search-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+.ps-search-icon {
+    color: #7a8da0;
+    flex-shrink: 0;
+    display: flex;
+}
+
+.ps-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 17px;
+    line-height: 1.4;
+    color: #2c3a47;
+    outline: none;
+}
+
+.ps-search-input::placeholder {
+    color: #a0adb8;
+}
+
+.ps-search-clear {
+    background: transparent;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    color: #a0adb8;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s;
+}
+
+.ps-search-clear:hover {
+    color: #465466;
+}
+
+.ps-overlay__close {
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    color: #7a8da0;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.ps-overlay__close:hover {
+    background: #f0f4f8;
+    color: #2c3a47;
+}
+
+/* ── Body (resultados) ──────────────────────────────────── */
+
+.ps-overlay__body {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(85vh - 80px);
+
+    @media (max-width: 640px) {
+        flex: 1;
+        max-height: none;
+    }
+}
+
+/* ── Loading ────────────────────────────────────────────── */
+
+.ps-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 40px 20px;
+    color: #7a8da0;
+    font-size: 0.9em;
+}
+
+.ps-spinner {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #e4e9ef;
+    border-top-color: #1D669D;
+    border-radius: 50%;
+    animation: ps-spin 0.7s linear infinite;
+}
+
+@keyframes ps-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Grid de resultados ─────────────────────────────────── */
+
+.ps-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 600px) {
+    .ps-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ── Tarjeta ────────────────────────────────────────────── */
+
+.ps-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid #e4e9ef;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.ps-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    transform: translateY(-2px);
+}
+
+.ps-card__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #f5f7fa;
+    overflow: hidden;
+}
+
+.ps-card__img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 8px;
+}
+
+.ps-card__img--placeholder {
+    background: linear-gradient(135deg, #eef1f5 0%, #dfe5ec 100%);
+}
+
+.ps-card__body {
+    padding: 10px 12px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.ps-card__title {
+    margin: 0;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #2c3a47;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ps-card__title mark {
+    background: #fff3cd;
+    border-radius: 2px;
+    padding: 0 1px;
+}
+
+.ps-card__excerpt {
+    margin: 0;
+    font-size: 0.78em;
+    color: #7a8da0;
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.ps-card__type {
+    margin-top: auto;
+    display: inline-block;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #1D669D;
+    background: #e8f2fb;
+    border-radius: 3px;
+    padding: 2px 6px;
+    align-self: flex-start;
+}
+
+/* ── Estados vacíos ─────────────────────────────────────── */
+
+.ps-no-results,
+.ps-initial-state {
+    padding: 40px 20px;
+    text-align: center;
+    color: #a0adb8;
+    font-size: 0.9em;
+}
+
+.ps-no-results p,
+.ps-initial-state p {
+    margin: 0;
+}
+
+/* ── Body lock (cuando overlay está abierto) ────────────── */
+
+body.ps-overlay-open {
+    overflow: hidden;
+}
+
+/* ── Accesibilidad ──────────────────────────────────────── */
+
+.ps-trigger:focus-visible,
+.ps-overlay__close:focus-visible,
+.ps-search-clear:focus-visible {
+    outline: 2px solid #1D669D;
+    outline-offset: 2px;
+}
+
+.ps-card:focus-visible {
+    outline: 2px solid #1D669D;
+    outline-offset: 2px;
+}

@@ -43,6 +43,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });    
 });
 
+/* SMOOTH SCROLL — enlaces internos de página */
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+
+    const id = link.getAttribute('href');
+    if (id === '#') return;
+
+    const target = document.querySelector(id);
+    if (!target) return;
+
+    e.preventDefault();
+
+    const headerHeight = document.querySelector('header.wp-block-template-part')?.offsetHeight || 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+    window.scrollTo({ top, behavior: 'smooth' });
+});
+
+/* SCROLL AL TOP en carga de página */
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 window.addEventListener('load', function() {
 
     /* NAVEGACIÓ SUBSECCIONS */

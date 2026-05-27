@@ -110,14 +110,23 @@
                     display: block;
                     text-align: center;
                     text-decoration: none !important;
-                    background-color: $white;
+                    color: $white;
                     border-radius: 0.5rem;
                     line-height: 100%;
-                    padding: 0.5rem 1rem;
+                    padding: 0.75rem 1rem;
+                    font-size: 1rem;
+                    margin: 1rem;
+                    background-color: $primary;
+                    transition: 0.35s;
                 }
 
                 &:hover {
-                    transform: scale(105%);
+
+                    a {
+                        transform: scale(105%);
+                        background-color: $CTA;
+                        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10) !important;
+                    }
                 }
 
             }

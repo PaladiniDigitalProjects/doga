@@ -13,8 +13,12 @@
  *   - Grupos distintos          → AND entre ellos
  */
 
-$post_type = sanitize_key( $attributes['postType'] ?? 'product' );
-$taxonomy  = sanitize_key( $attributes['taxonomy']  ?? 'motor-spec' );
+$post_type      = sanitize_key( $attributes['postType']     ?? 'product' );
+$taxonomy       = sanitize_key( $attributes['taxonomy']      ?? 'motor-spec' );
+$title          = wp_kses_post( $attributes['title']         ?? '' );
+$description    = wp_kses_post( $attributes['description']   ?? '' );
+$pagination     = (bool) ( $attributes['pagination']         ?? false );
+$posts_per_page = (int)  ( $attributes['postsPerPage']       ?? 12 );
 
 /**
  * Slugs de grupos padre que deben renderizarse como <select> (valor único).
@@ -53,7 +57,17 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
     data-taxonomy="<?php echo esc_attr( $taxonomy ); ?>"
     data-ajax-url="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>"
     data-nonce="<?php echo esc_attr( wp_create_nonce( 'pds_motor_filter' ) ); ?>"
+    data-pagination="<?php echo $pagination ? 'true' : 'false'; ?>"
+    data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>"
 >
+
+    <?php if ( $title ) : ?>
+    <h2 class="pds-mf__title"><?php echo $title; ?></h2>
+    <?php endif; ?>
+
+    <?php if ( $description ) : ?>
+    <p class="pds-mf__description"><?php echo $description; ?></p>
+    <?php endif; ?>
 
     <?php /* ── FILTROS ── */ ?>
     <div class="pds-mf__filters" role="search" aria-label="<?php esc_attr_e( 'Filtrar motores', 'pds-motor-finder' ); ?>">
@@ -77,18 +91,12 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
             class="pds-mf__group pds-mf__group--select"
             data-parent-id="<?php echo esc_attr( $parent->term_id ); ?>"
         >
-            <label
-                class="pds-mf__group-label"
-                for="pds-sel-<?php echo esc_attr( $parent->term_id ); ?>"
-            >
-                <?php echo esc_html( $parent->name ); ?>
-            </label>
             <select
                 id="pds-sel-<?php echo esc_attr( $parent->term_id ); ?>"
                 class="pds-mf__select"
                 data-parent="<?php echo esc_attr( $parent->term_id ); ?>"
             >
-                <option value=""><?php esc_html_e( 'All', 'pds-motor-finder' ); ?></option>
+                <option value=""><?php echo esc_html( $parent->name ); ?></option>
                 <?php foreach ( $children as $child ) : ?>
                 <option
                     value="<?php echo esc_attr( $child->term_id ); ?>"
@@ -139,7 +147,8 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
             $initial = new WP_Query( [
                 'post_type'      => $post_type,
                 'post_status'    => 'publish',
-                'posts_per_page' => -1,
+                'posts_per_page' => $pagination ? $posts_per_page : -1,
+                'paged'          => 1,
                 'orderby'        => 'title',
                 'order'          => 'ASC',
                 'tax_query'      => [
@@ -155,5 +164,11 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
         </div>
         <div class="pds-mf__spinner" aria-hidden="true"></div>
     </div>
+
+    <?php if ( $pagination && $initial->max_num_pages > 1 ) : ?>
+    <?php echo pds_motor_finder_pagination_html( 1, $initial->max_num_pages ); ?>
+    <?php endif; ?>
+
+    <p class="pds-mf__active-summary" hidden aria-live="polite"></p>
 
 </div>

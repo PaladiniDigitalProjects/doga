@@ -27,5 +27,5 @@
 
 @use 'blocks/noticias.scss';
 @use 'blocks/relacionado.scss';
-@use 'blocks/motor-specs.scss';
-@use 'blocks/motor-finder.scss';
+// motor-specs.scss → eliminado (movido al plugin pds-motor-finder)
+// motor-finder.scss → movido al plugin pds-motor-finder (autocontenido)

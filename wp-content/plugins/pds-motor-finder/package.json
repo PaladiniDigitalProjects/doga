@@ -2,10 +2,15 @@
   "name": "pds-motor-finder",
   "version": "1.0.0",
   "scripts": {
-    "build": "wp-scripts build",
-    "start": "wp-scripts start"
+    "build:js":  "wp-scripts build",
+    "build:css": "sass assets/scss/style.scss assets/css/style.css --style=compressed --no-source-map",
+    "build":     "npm run build:js && npm run build:css",
+    "start:js":  "wp-scripts start",
+    "start:css": "sass --watch assets/scss/style.scss assets/css/style.css",
+    "start":     "npm run start:css & npm run start:js"
   },
   "devDependencies": {
-    "@wordpress/scripts": "^30.0.0"
+    "@wordpress/scripts": "^30.0.0",
+    "sass": "^1.100.0"
   }
 }

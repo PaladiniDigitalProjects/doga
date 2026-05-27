@@ -56,6 +56,48 @@ function pds_motor_finder_results_html( WP_Query $query ) : string {
 }
 
 // ─────────────────────────────────────────────────────────────
+// 2b. HELPER — HTML de la paginación
+// ─────────────────────────────────────────────────────────────
+
+function pds_motor_finder_pagination_html( int $current, int $total ) : string {
+
+    if ( $total <= 1 ) return '';
+
+    $html = '<nav class="pds-mf__pagination" aria-label="' . esc_attr__( 'Páginas de resultados', 'pds-motor-finder' ) . '">';
+
+    // Anterior
+    $html .= sprintf(
+        '<button class="pds-mf__page-btn pds-mf__page-prev" data-page="%d" %s aria-label="%s">&#8592;</button>',
+        max( 1, $current - 1 ),
+        $current <= 1 ? 'disabled' : '',
+        esc_attr__( 'Página anterior', 'pds-motor-finder' )
+    );
+
+    // Números de página
+    for ( $i = 1; $i <= $total; $i++ ) {
+        $html .= sprintf(
+            '<button class="pds-mf__page-btn pds-mf__page-num%s" data-page="%d" aria-current="%s">%d</button>',
+            $i === $current ? ' is-active' : '',
+            $i,
+            $i === $current ? 'page' : 'false',
+            $i
+        );
+    }
+
+    // Siguiente
+    $html .= sprintf(
+        '<button class="pds-mf__page-btn pds-mf__page-next" data-page="%d" %s aria-label="%s">&#8594;</button>',
+        min( $total, $current + 1 ),
+        $current >= $total ? 'disabled' : '',
+        esc_attr__( 'Página siguiente', 'pds-motor-finder' )
+    );
+
+    $html .= '</nav>';
+
+    return $html;
+}
+
+// ─────────────────────────────────────────────────────────────
 // 3. AJAX HANDLER — pds_motor_filter
 //
 // Recibe:
@@ -75,10 +117,13 @@ function pds_motor_filter_handler() {
 
     check_ajax_referer( 'pds_motor_filter', 'nonce' );
 
-    $post_type = sanitize_key( $_POST['post_type'] ?? 'product' );
-    $taxonomy  = sanitize_key( $_POST['taxonomy']  ?? 'motor-spec' );
-    $raw       = stripslashes( $_POST['filters'] ?? '{}' );
-    $filters   = json_decode( $raw, true );
+    $post_type      = sanitize_key( $_POST['post_type']       ?? 'product' );
+    $taxonomy       = sanitize_key( $_POST['taxonomy']        ?? 'motor-spec' );
+    $raw            = stripslashes( $_POST['filters']         ?? '{}' );
+    $filters        = json_decode( $raw, true );
+    $pagination     = ( $_POST['pagination']                  ?? 'false' ) === 'true';
+    $posts_per_page = absint( $_POST['posts_per_page']        ?? 12 );
+    $page           = max( 1, absint( $_POST['page']          ?? 1 ) );
 
     // Construir tax_query
     $tax_query = [];
@@ -113,13 +158,21 @@ function pds_motor_filter_handler() {
     $query = new WP_Query( [
         'post_type'      => $post_type,
         'post_status'    => 'publish',
-        'posts_per_page' => -1,
+        'posts_per_page' => $pagination ? $posts_per_page : -1,
+        'paged'          => $pagination ? $page : 1,
         'orderby'        => 'title',
         'order'          => 'ASC',
         'tax_query'      => $tax_query,
     ] );
 
-    wp_send_json_success( [ 'html' => pds_motor_finder_results_html( $query ) ] );
+    $total_pages = $pagination ? (int) $query->max_num_pages : 1;
+
+    wp_send_json_success( [
+        'html'            => pds_motor_finder_results_html( $query ),
+        'pagination_html' => $pagination ? pds_motor_finder_pagination_html( $page, $total_pages ) : '',
+        'total_pages'     => $total_pages,
+        'current_page'    => $page,
+    ] );
 }
 
 // ─────────────────────────────────────────────────────────────

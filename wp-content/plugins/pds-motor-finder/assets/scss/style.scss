@@ -4,14 +4,34 @@
 // ─────────────────────────────────────────────────────────────
 
 .pds-motor-finder {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 2rem;
-    align-items: start;
+    background-color: white;
+    padding: .5rem;
+    border-radius: .5rem;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
 
-    @media (max-width: 768px) {
-        grid-template-columns: 1fr;
+    @media (min-width: 768px) {
+        padding: 1.5rem;
+        border-radius: 1rem;
     }
+
+}
+
+// ── Cabecera ──────────────────────────────────────────────────
+
+.pds-mf__title {
+    margin: 0 0 1rem;
+    font-weight: bold;
+    line-height: 100%;
+    font-size: 2rem;
+    font-style: italic;
+    color: #bf0811;
+}
+
+.pds-mf__description {
+    font-size: 0.9rem;
+    color: #8194ad;
+    margin: 0 0 1.5rem;
+    max-width: 300px;
 }
 
 // ── Panel de filtros ──────────────────────────────────────────
@@ -19,29 +39,34 @@
 .pds-mf__filters {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
+    // background-color: lime;
+    margin: 2rem auto;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .pds-mf__group {
+            width: calc(25% - 1rem);
+        }
+    }
+
+
 }
 
 // Etiqueta compartida: legend, label, summary
 .pds-mf__group-label {
     display: block;
-    font-size: 0.78em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #465466;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #8194ad;
     margin-bottom: 0.35rem;
 }
 
 // ── Grupo SELECT (2 opciones) ─────────────────────────────────
 
 .pds-mf__group--select {
-    display: flex;
-    flex-direction: column;
-
-    label.pds-mf__group-label {
-        cursor: default;
-    }
 
     .pds-mf__select {
         width: 100%;
@@ -49,7 +74,7 @@
         border: 1px solid #c9d1da;
         border-radius: 4px;
         background: #fff;
-        font-size: 0.9em;
+        font-size: 0.9rem;
         color: #2c3a47;
         cursor: pointer;
         appearance: auto;
@@ -58,6 +83,12 @@
             outline: 2px solid #1D669D;
             outline-offset: 2px;
         }
+
+        &.pds-mf__select--active {
+            color: #0A3A5E;
+            border-color: #0A3A5E;
+            font-weight: 600;
+        }
     }
 }
 
@@ -65,8 +96,13 @@
 
 .pds-mf__group--checks {
     display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.3rem 1rem;
+
+    .pds-mf__group-label {
+        width: 100%;
+    }
 }
 
 // ── Opciones checkbox ─────────────────────────────────────────
@@ -75,7 +111,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.88em;
+    font-size: 0.9rem;
     color: #2c3a47;
     cursor: pointer;
 
@@ -102,20 +138,21 @@
     width: 100%;
     padding: 0.45rem 0.75rem;
     background: transparent;
-    border: 1px solid #c9d1da;
+
     border-radius: 4px;
-    font-size: 0.82em;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #465466;
+
+    background: #f0f4f8;
+    color: #1D669D;
+    border: 1px solid #c9d1da;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
     transition: background 0.15s, color 0.15s;
 
     &:hover {
-        background: #f0f4f8;
-        color: #1D669D;
-        border-color: #1D669D;
+        background: #ffffff;
+        color: #465466;
+        border-color: #465466;
     }
 }
 
@@ -216,7 +253,70 @@
 }
 
 @keyframes pds-spin {
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+// ── Paginación ───────────────────────────────────────────────
+
+.pds-mf__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.pds-mf__page-btn {
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+    border: 1px solid #c9d1da;
+    border-radius: 4px;
+    background: #fff;
+    font-size: 0.85rem;
+    color: #465466;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+    &:hover:not(:disabled) {
+        background: #f0f4f8;
+        border-color: #1D669D;
+        color: #1D669D;
+    }
+
+    &.is-active {
+        background: #0A3A5E;
+        border-color: #0A3A5E;
+        color: #fff;
+        font-weight: 600;
+        pointer-events: none;
+    }
+
+    &:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
+}
+
+// ── Resumen filtros activos ───────────────────────────────────
+
+.pds-mf__active-summary {
+    font-size: 0.85rem;
+    color: #465466;
+    margin: 1.5rem 0 0 0;
+    min-height: 1.2em;
+}
+
+.pds-mf__active-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8194ad;
+    margin: 0 0 0.35rem;
 }
 
 // ── Mensaje vacío ─────────────────────────────────────────────

@@ -35,7 +35,7 @@ function my_theme_enqueue_assets() {
         'child-main-js',
         get_stylesheet_directory_uri() . '/assets/js/main.js',
         [ 'jquery' ],
-        '1.0.0',
+        filemtime( get_stylesheet_directory() . '/assets/js/main.js' ),
         true
     );
 

@@ -32,7 +32,6 @@ $select_groups = apply_filters( 'pds_motor_finder_select_groups', [
     'nominal-torque-nm',       // Nominal Torque (Nm)
     'stall-torque-nm',         // Stall Torque (Nm)
     'power-w',                 // Power (W)
-    'hall-sensor',             // Hall Sensor
     'ip-level',                // IP Level
 ] );
 
@@ -49,6 +48,28 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
     echo '<p class="pds-mf-empty">' . esc_html__( 'No hay specs disponibles.', 'pds-motor-finder' ) . '</p>';
     return;
 }
+
+// Orden explícito: hall-sensor aparece después de ip-level
+$slug_order = [
+    'n1-no-load-speed-rpm',
+    'nominal-speed-rpm',
+    'nominal-speed-rad-s',
+    'nominal-torque-nm',
+    'stall-torque-nm',
+    'power-w',
+    'ip-level',
+    'hall-sensor',
+    'voltage-nominal',
+    'commutation',
+    'controller',
+];
+usort( $parent_terms, function( $a, $b ) use ( $slug_order ) {
+    $pos_a = array_search( $a->slug, $slug_order, true );
+    $pos_b = array_search( $b->slug, $slug_order, true );
+    $pos_a = $pos_a === false ? 99 : $pos_a;
+    $pos_b = $pos_b === false ? 99 : $pos_b;
+    return $pos_a - $pos_b;
+} );
 ?>
 
 <div
@@ -61,36 +82,49 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
     data-posts-per-page="<?php echo esc_attr( $posts_per_page ); ?>"
 >
 
-    <?php if ( $title ) : ?>
-    <h2 class="pds-mf__title"><?php echo $title; ?></h2>
-    <?php endif; ?>
+    <?php
+    // Pre-separar términos en selects y checkboxes (manteniendo el orden de $slug_order)
+    $select_terms   = [];
+    $checkbox_terms = [];
+    foreach ( $parent_terms as $parent ) {
+        if ( in_array( $parent->slug, $select_groups, true ) ) {
+            $select_terms[] = $parent;
+        } else {
+            $checkbox_terms[] = $parent;
+        }
+    }
+    ?>
+
+    <?php /* ── HEADER: título + botón Reset en la misma línea ── */ ?>
+    <div class="pds-mf__header" role="search" aria-label="<?php esc_attr_e( 'Filtrar motores', 'pds-motor-finder' ); ?>">
+        <?php if ( $title ) : ?>
+        <h2 class="pds-mf__title"><?php echo $title; ?></h2>
+        <?php else : ?>
+        <span></span>
+        <?php endif; ?>
+        <button type="button" class="pds-mf__reset">
+            <?php esc_html_e( 'Reset', 'pds-motor-finder' ); ?>
+        </button>
+    </div>
 
     <?php if ( $description ) : ?>
     <p class="pds-mf__description"><?php echo $description; ?></p>
     <?php endif; ?>
 
-    <?php /* ── FILTROS ── */ ?>
-    <div class="pds-mf__filters" role="search" aria-label="<?php esc_attr_e( 'Filtrar motores', 'pds-motor-finder' ); ?>">
-
-        <?php foreach ( $parent_terms as $parent ) :
+    <?php /* ── SELECTS: grid de 4 columnas ── */ ?>
+    <?php if ( ! empty( $select_terms ) ) : ?>
+    <div class="pds-mf__filters pds-mf__filters--selects">
+        <?php foreach ( $select_terms as $parent ) :
             $children = get_terms( [
                 'taxonomy'   => $taxonomy,
                 'parent'     => $parent->term_id,
                 'hide_empty' => true,
-                'orderby'    => 'id',
+                'orderby'    => 'name',
                 'order'      => 'ASC',
             ] );
             if ( is_wp_error( $children ) || empty( $children ) ) continue;
-
-            $is_select = in_array( $parent->slug, $select_groups, true );
         ?>
-
-        <?php if ( $is_select ) : ?>
-        <?php /* ── SELECT nativo (grupos numéricos / booleanos) ── */ ?>
-        <div
-            class="pds-mf__group pds-mf__group--select"
-            data-parent-id="<?php echo esc_attr( $parent->term_id ); ?>"
-        >
+        <div class="pds-mf__group pds-mf__group--select" data-parent-id="<?php echo esc_attr( $parent->term_id ); ?>">
             <select
                 id="pds-sel-<?php echo esc_attr( $parent->term_id ); ?>"
                 class="pds-mf__select"
@@ -98,22 +132,30 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
             >
                 <option value=""><?php echo esc_html( $parent->name ); ?></option>
                 <?php foreach ( $children as $child ) : ?>
-                <option
-                    value="<?php echo esc_attr( $child->term_id ); ?>"
-                    data-slug="<?php echo esc_attr( $child->slug ); ?>"
-                >
+                <option value="<?php echo esc_attr( $child->term_id ); ?>" data-slug="<?php echo esc_attr( $child->slug ); ?>">
                     <?php echo esc_html( $child->name ); ?>
                 </option>
                 <?php endforeach; ?>
             </select>
         </div>
+        <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
 
-        <?php else : ?>
-        <?php /* ── Checkboxes planos (grupos categóricos) ── */ ?>
-        <div
-            class="pds-mf__group pds-mf__group--checks"
-            data-parent-id="<?php echo esc_attr( $parent->term_id ); ?>"
-        >
+    <?php /* ── CHECKBOXES: grid de 4 columnas ── */ ?>
+    <?php if ( ! empty( $checkbox_terms ) ) : ?>
+    <div class="pds-mf__filters pds-mf__filters--checks">
+        <?php foreach ( $checkbox_terms as $parent ) :
+            $children = get_terms( [
+                'taxonomy'   => $taxonomy,
+                'parent'     => $parent->term_id,
+                'hide_empty' => true,
+                'orderby'    => 'name',
+                'order'      => $parent->slug === 'hall-sensor' ? 'DESC' : 'ASC',
+            ] );
+            if ( is_wp_error( $children ) || empty( $children ) ) continue;
+        ?>
+        <div class="pds-mf__group pds-mf__group--checks" data-parent-id="<?php echo esc_attr( $parent->term_id ); ?>">
             <span class="pds-mf__group-label"><?php echo esc_html( $parent->name ); ?></span>
             <?php foreach ( $children as $child ) : ?>
             <label class="pds-mf__option">
@@ -128,17 +170,9 @@ if ( is_wp_error( $parent_terms ) || empty( $parent_terms ) ) {
             </label>
             <?php endforeach; ?>
         </div>
-        <?php endif; ?>
-
         <?php endforeach; ?>
-
-        <div class="pds-mf__actions">
-            <button type="button" class="pds-mf__reset">
-                <?php esc_html_e( 'Reset', 'pds-motor-finder' ); ?>
-            </button>
-        </div>
-
     </div>
+    <?php endif; ?>
 
     <?php /* ── RESULTADOS ── */ ?>
     <div class="pds-mf__results" aria-live="polite" aria-busy="false">

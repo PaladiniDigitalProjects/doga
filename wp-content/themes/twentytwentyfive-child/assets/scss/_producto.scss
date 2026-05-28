@@ -1,3 +1,69 @@
+@use 'variables' as *;
+
+// ── Ficha de producto: Especificaciones motor-spec ────────────
+// Renderizado per pds_render_motor_spec_grouped (render_block filter)
+
+.motor-specs-grouped {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.motor-spec-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eef1f5;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__label {
+    display: block;
+    width: 100%;
+    font-weight: 700;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #465466;
+  }
+
+  &__value {
+    display: block;
+    width: 100%;
+    font-size: 0.9em;
+    color: #1D669D;
+  }
+}
+
+// ── pds-acf-block: botó de descàrrega ─────────────────────────
+
+.wp-block-pds-acf-field-block-field {
+  display: block;
+  font-weight: 700;
+
+  > a {
+    display: block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #bf0811;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    &:hover {
+      background: #96060d;
+      color: #ffffff;
+    }
+  }
+}
+
+// ── Single proyecto ───────────────────────────────────────────
+
 .single-proyecto {
 
   h1 {

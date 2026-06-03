@@ -36,6 +36,8 @@ wp-content/uploads/siteground-optimizer-assets/
 wp-content/uploads/wp-migrate-db/
 wp-content/uploads/wpallexport/
 wp-content/uploads/wpallimport/
+wp-content/uploads/wpforms/
+wp-content/uploads/wpml/
 
 # Videos >100MB (límite GitHub)
 # wp-content/uploads/YYYY/MM/archivo-grande.mov

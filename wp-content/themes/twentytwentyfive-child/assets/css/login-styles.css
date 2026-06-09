@@ -1047,7 +1047,7 @@ figcaption.wp-element-caption strong {
   padding-left: 0.75rem;
   border: none;
   border: 0.05rem solid #BF0811;
-  color: #9c9c9c;
+  color: #c1c1c1;
   font-size: 11px;
   font-size: 1.1rem;
   border-radius: 0.5rem;
@@ -1057,7 +1057,7 @@ figcaption.wp-element-caption strong {
   font-weight: 400;
   font-size: 11px;
   font-size: 1.1rem;
-  color: #9c9c9c;
+  color: #c1c1c1;
 }
 .wpforms-container .wpforms-field .wpforms-field-medium::placeholder, .wpforms-container .wpforms-field .wpforms-field-medium.placeholder,
 .wpforms-container .wpforms-field .iti::placeholder,
@@ -1067,7 +1067,7 @@ figcaption.wp-element-caption strong {
   font-weight: 400;
   font-size: 11px;
   font-size: 1.1rem;
-  color: #9c9c9c;
+  color: #c1c1c1;
 }
 .wpforms-container .wpforms-field .wpforms-field-medium input[type=tel],
 .wpforms-container .wpforms-field .iti input[type=tel],
@@ -1081,7 +1081,7 @@ figcaption.wp-element-caption strong {
   background-color: #ffffff !important;
 }
 .wpforms-container label.wpforms-field-label-inline {
-  color: #9c9c9c;
+  color: #c1c1c1;
 }
 .wpforms-container .wpforms-submit-container {
   text-align: right;
@@ -1095,13 +1095,13 @@ figcaption.wp-element-caption strong {
 div.wpforms-container-full .wpforms-confirmation-container-full,
 div[submit-success] > .wpforms-confirmation-container-full:not(.wpforms-redirection-message) {
   background: #ffffff;
-  color: #9c9c9c;
+  color: #c1c1c1;
   box-sizing: border-box;
 }
 
 div.wpforms-container-full .wpforms-confirmation-container-full p,
 div[submit-success] > .wpforms-confirmation-container-full:not(.wpforms-redirection-message) p {
-  color: #9c9c9c;
+  color: #c1c1c1;
   font-size: 11px;
   font-size: 1.1rem;
 }

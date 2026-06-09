@@ -1,1 +1,174 @@
-(()=>{function e(e){const t=e.dataset.ajaxUrl,n=e.dataset.nonce,s=e.dataset.postType,r=e.dataset.taxonomy,o="true"===e.dataset.pagination,a=parseInt(e.dataset.postsPerPage,10)||12;let c=1;const l=e.querySelector(".pds-mf__results-inner"),d=e.querySelector(".pds-mf__spinner"),i=e.querySelector(".pds-mf__reset"),p=e.querySelectorAll(".pds-mf__checkbox"),u=e.querySelectorAll(".pds-mf__select"),f=e.querySelector(".pds-mf__active-summary");let m=null;function _(){c=1,clearTimeout(m),m=setTimeout(h,300)}function h(){const e={};p.forEach(t=>{if(!t.checked)return;const n=t.dataset.parent;e[n]||(e[n]=[]),e[n].push(t.value)}),u.forEach(t=>{if(!t.value)return;const n=t.dataset.parent;e[n]||(e[n]=[]),e[n].push(t.value)}),function(){if(!f)return;const e=[];u.forEach(t=>{if(!t.value)return;const n=t.options[0].text,s=t.options[t.selectedIndex].text;e.push(`<strong>${n}:</strong> ${s}`)});const t={};p.forEach(e=>{if(!e.checked)return;const n=e.closest(".pds-mf__group"),s=n?n.querySelector(".pds-mf__group-label"):null,r=s?s.textContent.trim():e.dataset.parent;t[r]||(t[r]=[]),t[r].push(e.closest(".pds-mf__option").querySelector("span").textContent.trim())});for(const[n,s]of Object.entries(t))e.push(`<strong>${n}:</strong> ${s.join(", ")}`);f.innerHTML=e.length?'<h5 class="pds-mf__active-label">Active</h5>'+e.join(" &nbsp;·&nbsp; "):"",f.hidden=0===e.length}(),v(!0);const d=new URLSearchParams({action:"pds_motor_filter",nonce:n,post_type:s,taxonomy:r,filters:JSON.stringify(e),pagination:o?"true":"false",posts_per_page:a,page:c});fetch(t,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:d.toString()}).then(e=>e.json()).then(e=>{e.success?(l.innerHTML=e.data.html,g(e.data.pagination_html)):(l.innerHTML='<p class="pds-mf-empty">No se encontraron resultados.</p>',g(""))}).catch(()=>{l.innerHTML='<p class="pds-mf-empty">Error al cargar los resultados.</p>'}).finally(()=>{v(!1)})}function y(){e.querySelectorAll(".pds-mf__page-btn").forEach(e=>{e.addEventListener("click",()=>{e.disabled||(c=parseInt(e.dataset.page,10),h())})})}function g(t){const n=e.querySelector(".pds-mf__pagination");t?(n?n.outerHTML=t:e.querySelector(".pds-mf__results").insertAdjacentHTML("afterend",t),y()):n&&n.remove()}function v(t){e.querySelector(".pds-mf__results").setAttribute("aria-busy",t?"true":"false"),d.style.display=t?"block":"none"}p.forEach(e=>e.addEventListener("change",_)),u.forEach(e=>e.addEventListener("change",()=>{e.classList.toggle("pds-mf__select--active",""!==e.value),_()})),i.addEventListener("click",()=>{p.forEach(e=>{e.checked=!1}),u.forEach(e=>{e.value="",e.classList.remove("pds-mf__select--active")}),h()}),y()}document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".pds-motor-finder").forEach(e)})})();
+/******/ (() => { // webpackBootstrap
+/*!*************************!*\
+  !*** ./src/frontend.js ***!
+  \*************************/
+/**
+ * PDS Motor Finder — Frontend
+ *
+ * Lógica de filtrado AJAX:
+ * - Grupos con 2 opciones  → <select> nativo   (1 sola selección, OR implícito)
+ * - Grupos con > 2 opciones → <details> + checkboxes (OR dentro del grupo)
+ * - Grupos distintos → AND entre ellos
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.pds-motor-finder').forEach(initFinder);
+});
+function initFinder(finder) {
+  const ajaxUrl = finder.dataset.ajaxUrl;
+  const nonce = finder.dataset.nonce;
+  const postType = finder.dataset.postType;
+  const taxonomy = finder.dataset.taxonomy;
+  const usePagination = finder.dataset.pagination === 'true';
+  const postsPerPage = parseInt(finder.dataset.postsPerPage, 10) || 12;
+  let currentPage = 1;
+  const resultsEl = finder.querySelector('.pds-mf__results-inner');
+  const spinnerEl = finder.querySelector('.pds-mf__spinner');
+  const resetBtn = finder.querySelector('.pds-mf__reset');
+  const checkboxes = finder.querySelectorAll('.pds-mf__checkbox');
+  const selects = finder.querySelectorAll('.pds-mf__select');
+  const summaryEl = finder.querySelector('.pds-mf__active-summary');
+  let debounceTimer = null;
+  function scheduleUpdate() {
+    currentPage = 1; // reset página al cambiar filtros
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(fetchResults, 300);
+  }
+
+  // ── Escuchar cambios en checkboxes ──
+  checkboxes.forEach(cb => cb.addEventListener('change', scheduleUpdate));
+
+  // ── Escuchar cambios en selects ──
+  selects.forEach(sel => sel.addEventListener('change', () => {
+    sel.classList.toggle('pds-mf__select--active', sel.value !== '');
+    scheduleUpdate();
+  }));
+
+  // ── Reset ──
+  resetBtn.addEventListener('click', () => {
+    checkboxes.forEach(cb => {
+      cb.checked = false;
+    });
+    selects.forEach(sel => {
+      sel.value = '';
+      sel.classList.remove('pds-mf__select--active');
+    });
+    fetchResults();
+  });
+
+  // ── Resumen de filtros activos ──
+  function updateSummary() {
+    if (!summaryEl) return;
+    const parts = [];
+
+    // Selects con valor activo
+    selects.forEach(sel => {
+      if (!sel.value) return;
+      const groupName = sel.options[0].text; // primera opción = nombre del grupo
+      const valueName = sel.options[sel.selectedIndex].text;
+      parts.push(`<strong>${groupName}:</strong> ${valueName}`);
+    });
+
+    // Checkboxes marcados, agrupados por padre
+    const cbGroups = {};
+    checkboxes.forEach(cb => {
+      if (!cb.checked) return;
+      const group = cb.closest('.pds-mf__group');
+      const label = group ? group.querySelector('.pds-mf__group-label') : null;
+      const groupName = label ? label.textContent.trim() : cb.dataset.parent;
+      if (!cbGroups[groupName]) cbGroups[groupName] = [];
+      cbGroups[groupName].push(cb.closest('.pds-mf__option').querySelector('span').textContent.trim());
+    });
+    for (const [groupName, values] of Object.entries(cbGroups)) {
+      parts.push(`<strong>${groupName}:</strong> ${values.join(', ')}`);
+    }
+    summaryEl.innerHTML = parts.length ? '<h5 class="pds-mf__active-label">Active</h5>' + parts.join(' &nbsp;·&nbsp; ') : '';
+    summaryEl.hidden = parts.length === 0;
+  }
+
+  // ── Función principal AJAX ──
+  function fetchResults() {
+    // Recoger grupos de checkboxes marcados
+    const groups = {};
+    checkboxes.forEach(cb => {
+      if (!cb.checked) return;
+      const parentId = cb.dataset.parent;
+      if (!groups[parentId]) groups[parentId] = [];
+      groups[parentId].push(cb.value);
+    });
+
+    // Recoger valores de selects con valor no vacío
+    selects.forEach(sel => {
+      if (!sel.value) return;
+      const parentId = sel.dataset.parent;
+      if (!groups[parentId]) groups[parentId] = [];
+      groups[parentId].push(sel.value);
+    });
+    updateSummary();
+    setLoading(true);
+    const body = new URLSearchParams({
+      action: 'pds_motor_filter',
+      nonce: nonce,
+      post_type: postType,
+      taxonomy: taxonomy,
+      filters: JSON.stringify(groups),
+      pagination: usePagination ? 'true' : 'false',
+      posts_per_page: postsPerPage,
+      page: currentPage
+    });
+    fetch(ajaxUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: body.toString()
+    }).then(r => r.json()).then(data => {
+      if (data.success) {
+        resultsEl.innerHTML = data.data.html;
+        renderPagination(data.data.pagination_html);
+      } else {
+        resultsEl.innerHTML = '<p class="pds-mf-empty">No se encontraron resultados.</p>';
+        renderPagination('');
+      }
+    }).catch(() => {
+      resultsEl.innerHTML = '<p class="pds-mf-empty">Error al cargar los resultados.</p>';
+    }).finally(() => {
+      setLoading(false);
+    });
+  }
+
+  // ── Paginación ──
+  function attachPaginationListeners() {
+    finder.querySelectorAll('.pds-mf__page-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.disabled) return;
+        currentPage = parseInt(btn.dataset.page, 10);
+        fetchResults();
+      });
+    });
+  }
+  function renderPagination(html) {
+    const paginationEl = finder.querySelector('.pds-mf__pagination');
+    if (!html) {
+      if (paginationEl) paginationEl.remove();
+      return;
+    }
+    if (paginationEl) {
+      paginationEl.outerHTML = html;
+    } else {
+      finder.querySelector('.pds-mf__results').insertAdjacentHTML('afterend', html);
+    }
+    attachPaginationListeners();
+  }
+
+  // Listeners para paginación server-rendered (carga inicial)
+  attachPaginationListeners();
+  function setLoading(isLoading) {
+    const resultsWrapper = finder.querySelector('.pds-mf__results');
+    resultsWrapper.setAttribute('aria-busy', isLoading ? 'true' : 'false');
+    spinnerEl.style.display = isLoading ? 'block' : 'none';
+  }
+}
+/******/ })()
+;
+//# sourceMappingURL=frontend.js.map

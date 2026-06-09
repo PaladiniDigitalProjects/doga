@@ -4870,11 +4870,6 @@ body.active .menu-content {
   padding-bottom: 6rem;
 }
 
-.has-global-padding {
-  padding-right: 1rem !important;
-  padding-left: 1rem !important;
-}
-
 .ProductTemplate {
   padding: 1.5rem !important;
 }

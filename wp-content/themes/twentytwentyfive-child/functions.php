@@ -393,13 +393,37 @@ function register_product_attribute_taxonomy()
         'show_in_rest' => true, // Enables support for Gutenberg
         'query_var' => true,
         'public' => false,
-        'publicly_queryable' => false,
+        'publicly_queryable' => true,
         'rewrite' => array('slug' => 'product-attribute'),
     );
 
     register_taxonomy('product-attribute', array('product'), $args);
 }
 add_action('init', 'register_product_attribute_taxonomy');
+
+// Envuelve cada término de product-attribute en su propio <span> (sin enlaces ni separadores)
+add_filter( 'render_block', function( $block_content, $block ) {
+    if (
+        ( $block['blockName'] ?? '' ) === 'core/post-terms' &&
+        ( $block['attrs']['term'] ?? '' ) === 'product-attribute'
+    ) {
+        // Elimina <a> manteniendo el texto
+        $block_content = preg_replace( '/<a\b[^>]*>(.*?)<\/a>/is', '$1', $block_content );
+        // Sustituye los separadores por un marcador temporal
+        $block_content = preg_replace( '/<span class="wp-block-post-terms__separator">.*?<\/span>/is', '||SEP||', $block_content );
+        // Envuelve cada término en <span class="product-attr-tag">
+        $block_content = preg_replace_callback(
+            '/(<div[^>]*wp-block-post-terms[^>]*>)(.*?)(<\/div>)/is',
+            function ( $m ) {
+                $tags = array_filter( array_map( 'trim', explode( '||SEP||', $m[2] ) ) );
+                $html = implode( '', array_map( fn( $t ) => '<span class="product-attr-tag">' . $t . '</span>', $tags ) );
+                return $m[1] . $html . $m[3];
+            },
+            $block_content
+        );
+    }
+    return $block_content;
+}, 10, 2 );
 
 
 // Register Product Market Sector Custom Taxnomy
@@ -747,13 +771,14 @@ function cptui_register_my_cpts() {
 		],
 		"description"          => "",
 		"public"               => true,
-		"publicly_queryable"   => false,
+		"publicly_queryable"   => true,
 		"show_ui"              => true,
 		"show_in_rest"         => true,
-		"rest_base"            => "",
+		"rest_base"            => "sostenibilidad",
+		"taxonomies"           => [ "category" ],
 		"rest_controller_class"=> "WP_REST_Posts_Controller",
 		"rest_namespace"       => "wp/v2",
-		"has_archive"          => false,
+		"has_archive"          => true,
 		"show_in_menu"         => true,
 		"show_in_nav_menus"    => true,
 		"show_in_admin_bar"    => true,
@@ -766,7 +791,7 @@ function cptui_register_my_cpts() {
 		"rewrite"              => [ "slug" => "sostenibilidad", "with_front" => true ],
 		"query_var"            => true,
 		"menu_icon"            => "dashicons-admin-site-alt2",
-		"supports"             => [ "title", "editor", "thumbnail", "custom-fields" ],
+		"supports"             => [ "title", "author", "editor", "excerpt", "thumbnail" ],
 	] );
 
 	/**

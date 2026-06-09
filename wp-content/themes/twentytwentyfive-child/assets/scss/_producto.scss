@@ -24,18 +24,90 @@
   &__label {
     display: block;
     width: 100%;
-    font-weight: 700;
-    font-size: 0.78em;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: #465466;
+    font-weight: 600;
+    font-size: 0.8em;
+    color: $secondary;
   }
 
   &__value {
     display: block;
     width: 100%;
-    font-size: 0.9em;
-    color: #1D669D;
+    font-size: 1em;
+    color: $primary;
+  }
+}
+
+// ── Galeria producte: fletxes ─────────────────────────────────
+
+.apdb-product-slider__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba($gray, 0.7);
+  background: rgba($gray, 0.08);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba($gray, 0.85);
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  padding: 0;
+  line-height: 0;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-right: 1.5px solid currentColor;
+    border-top: 1.5px solid currentColor;
+  }
+
+  &--prev::before {
+    transform: rotate(-135deg) translateX(2px);
+  }
+
+  &--next::before {
+    transform: rotate(45deg) translateX(-2px);
+  }
+
+  &:hover {
+    background: rgba($gray, 0.2);
+    border-color: $gray;
+    color: $gray;
+  }
+}
+
+// ── Galeria producte: lupa ────────────────────────────────────
+
+.apdb-product-slider__zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 20;
+  width: auto;
+  height: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 4px;
+  color: rgba($gray, 0.85);
+  transition: color 0.2s ease;
+
+  svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+  }
+
+  &:hover {
+    color: $gray;
   }
 }
 
@@ -43,21 +115,40 @@
 
 .wp-block-pds-acf-field-block-field {
   display: block;
-  font-weight: 700;
+  font-weight: 600;
 
-  > a {
+  >a {
+    font-size: 0.9rem;
+    letter-spacing: 0.015rem;
     display: block;
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background: #bf0811;
-    color: #ffffff;
+    padding: 0.75rem 3rem 0.75rem 1rem;
+    background: $CTA;
+    color: $white;
     text-decoration: none;
     border-radius: 0.5rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-width: 16rem;
+    transition: 0.35s;
+    position: relative;
+
+    &::after {
+      content: ' ';
+      background: url('../images/Dowload_Arrow.svg') center no-repeat;
+      background-size: 100%;
+      display: block;
+      position: absolute;
+      top: 0.65rem;
+      right: 1rem;
+      width: 18px;
+      height: 24px;
+    }
+
 
     &:hover {
-      background: #96060d;
-      color: #ffffff;
+      background: $CTA;
+      color: $white;
+      transform: scale(105%);
+      opacity: 1;
     }
   }
 }
@@ -83,7 +174,124 @@
     margin-top: 0;
     padding-top: 6rem;
     padding-bottom: 6rem;
-
-    border: 2px solid red;
   }
+}
+
+
+.has-global-padding {
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
+}
+
+
+.ProductTemplate {
+  padding: 1.5rem !important;
+
+  .apdb-product-details__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .apdb-product-details__row {
+      display: flex;
+      flex-direction: column;
+      width: calc(40% - 0.5rem);
+
+      .apdb-product-details__label {
+        display: block;
+        width: 100%;
+        font-weight: 600;
+        font-size: 0.6em;
+        color: $secondary;
+      }
+
+      .apdb-product-details__value {
+        display: block;
+        width: 100%;
+        font-size: 1.25rem;
+        color: $primary;
+        border-bottom: 1px solid #eef1f5;
+        padding-bottom: 0.5rem;
+
+      }
+
+      .apdb-product-details__nested-list {
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        padding-left: 0;
+      }
+    }
+  }
+
+  @include laptop {
+    padding: 2rem !important;
+  }
+
+  .motor-specs-grouped {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    .motor-spec-row {
+      width: calc(50% - 1rem);
+      gap: 0.5rem;
+
+      .motor-spec-row__label {
+        text-transform: none;
+        font-size: 0.8rem;
+      }
+
+      .motor-spec-row__value {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .ProducTags {
+    span {
+      background-color: $secondary;
+      color: $white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 500;
+      line-height: 100%;
+      font-size: 0.8rem;
+      padding: 0.3rem 0.5rem 0.25rem;
+      letter-spacing: 0.025rem;
+      border-radius: 0.3rem;
+      margin: 0.5rem 0.5rem 0 0;
+    }
+  }
+}
+
+.apdb-product-slider {
+  border: 1px solid #eef1f5;
+  border-radius: .5rem;
+}
+
+.apdb-product-slider__thumbs {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  border-top: 1px solid #eef1f5;
+  padding: 0.5rem;
+}
+
+.apdb-product-slider__slide {
+  justify-content: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100%;
+}
+
+.css-1n451hs {
+  height: auto !important;
 }

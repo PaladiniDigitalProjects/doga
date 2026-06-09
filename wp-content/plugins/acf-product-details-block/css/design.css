@@ -1,0 +1,14 @@
+:root {
+    --apdb-color-primary: #003a54;
+    --apdb-color-primary-soft: rgba(0, 115, 170, 0.1);
+    --apdb-color-border: #ddd;
+    --apdb-color-text: #222;
+    --apdb-color-muted: #666;
+    --apdb-radius-sm: 4px;
+    --apdb-radius-md: 6px;
+    --apdb-spacing-xs: 0.25rem;
+    --apdb-spacing-sm: 0.5rem;
+    --apdb-spacing-md: 1rem;
+    --apdb-spacing-lg: 2rem;
+    --apdb-font-family: 'Montserrat', Sans-serif;
+}

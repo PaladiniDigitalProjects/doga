@@ -45,3 +45,5 @@ wp-content/uploads/wpml/
 # Añade aquí plugins custom con el mismo patrón
 # !wp-content/plugins/mi-plugin-custom/
 # !wp-content/plugins/mi-plugin-custom/**
+!wp-content/plugins/acf-product-details-block/
+!wp-content/plugins/acf-product-details-block/**

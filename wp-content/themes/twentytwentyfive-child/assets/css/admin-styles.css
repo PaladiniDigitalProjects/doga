@@ -954,14 +954,6 @@ figcaption.wp-element-caption strong {
 }
 
 /* BUTTONS */
-.wp-swiper .swiper-pagination-bullets {
-  text-align: right;
-  bottom: 0;
-}
-.wp-swiper .swiper-pagination-bullets .swiper-pagination-bullet-active {
-  background-color: #BF0811 !important;
-}
-
 .product-list .product a {
   text-decoration: none;
 }
@@ -1161,7 +1153,7 @@ header.wp-block-template-part .wp-block-buttons {
   border-radius: 50% !important;
   height: 10px !important;
   width: 10px !important;
-  background-color: #ffffff;
+  background-color: #c1c1c1;
 }
 .ghub-slider-pagination .swiper-pagination-bullet .swiper-pagination-bullet-active {
   height: 10px !important;
@@ -4008,6 +4000,14 @@ body.active .menu-content {
   right: 2rem;
   top: 2rem;
   z-index: 999999;
+}
+@media (max-width: 768px) {
+  .location_map .mlf-filters-select {
+    right: auto !important;
+    left: 40% !important;
+    top: 1.5rem !important;
+    transform: translateX(-50%) !important;
+  }
 }
 
 .tribe-events-widget-events-list__events {

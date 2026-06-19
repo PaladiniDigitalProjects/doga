@@ -954,14 +954,6 @@ figcaption.wp-element-caption strong {
 }
 
 /* BUTTONS */
-.wp-swiper .swiper-pagination-bullets {
-  text-align: right;
-  bottom: 0;
-}
-.wp-swiper .swiper-pagination-bullets .swiper-pagination-bullet-active {
-  background-color: #BF0811 !important;
-}
-
 .product-list .product a {
   text-decoration: none;
 }

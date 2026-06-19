@@ -109,3 +109,19 @@
     }
   }
 }
+
+.ghub-slider-pagination {
+  .swiper-pagination-bullet {
+    border-radius: 50% !important;
+    height: 10px !important;
+    width: 10px !important;
+    background-color: $white;
+
+    .swiper-pagination-bullet-active {
+      height: 10px !important;
+      width: 10px !important;
+      background-color: $CTA;
+    }
+
+  }
+}

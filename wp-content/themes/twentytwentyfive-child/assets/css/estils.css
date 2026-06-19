@@ -3913,6 +3913,14 @@ body.active .menu-content {
   top: 2rem;
   z-index: 999999;
 }
+@media (max-width: 768px) {
+  .location_map .mlf-filters-select {
+    right: auto !important;
+    left: 40% !important;
+    top: 1.5rem !important;
+    transform: translateX(-50%) !important;
+  }
+}
 
 .tribe-events-widget-events-list__events {
   display: flex !important;

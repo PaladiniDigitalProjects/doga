@@ -745,4 +745,13 @@
     top: 2rem;
     z-index: 999999;
   }
+
+  @media (max-width: 768px) {
+    .mlf-filters-select {
+      right: auto !important;
+      left: 40% !important;
+      top: 1.5rem !important;
+      transform: translateX(-50%) !important;
+    }
+  }
 }

@@ -1157,6 +1157,18 @@ header.wp-block-template-part .wp-block-buttons {
   background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjIiIHZpZXdCb3g9IjAgMCAyNCAyMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzLjU1MSAyMS41TDExLjc1NTEgMTkuNzE4N0wxOS4xNDg3IDEyLjI4OTFIMFY5LjcxMDk0SDE5LjE0ODdMMTEuNzU1MSAyLjMwNDY5TDEzLjU1MSAwLjVMMjQgMTFMMTMuNTUxIDIxLjVaIiBmaWxsPSIjMzQzNDM0Ii8+Cjwvc3ZnPgo=");
 }
 
+.ghub-slider-pagination .swiper-pagination-bullet {
+  border-radius: 50% !important;
+  height: 10px !important;
+  width: 10px !important;
+  background-color: #ffffff;
+}
+.ghub-slider-pagination .swiper-pagination-bullet .swiper-pagination-bullet-active {
+  height: 10px !important;
+  width: 10px !important;
+  background-color: #BF0811;
+}
+
 /*!
  * animate.css - https://animate.style/
  * Version - 4.1.1

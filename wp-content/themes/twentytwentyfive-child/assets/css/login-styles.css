@@ -312,14 +312,17 @@ figcaption.wp-element-caption strong {
 /* BOX SHADOW */
 .shadow {
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
 }
 
 .shadow10 {
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
 }
 
 .shadow20 {
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
 }
 
 /* IMG */
@@ -990,6 +993,10 @@ figcaption.wp-element-caption strong {
   width: 100%;
   max-width: 500px;
   height: auto !important;
+}
+.apertura .has-global-padding {
+  padding-left: 0;
+  padding-right: 0;
 }
 .apertura .max300 {
   width: 100%;

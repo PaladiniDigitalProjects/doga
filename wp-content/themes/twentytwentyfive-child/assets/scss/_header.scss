@@ -1,9 +1,28 @@
 @use 'variables' as *;
 
 // HEADER PAG
+@include mobile {
+  html.has-modal-open {
+    header.wp-block-template-part {
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      &.fullheader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+}
+
 
 header.wp-block-template-part {
-
   padding: 0 1rem;
   width: calc(100% - 2rem);
   margin: 0 auto;
@@ -19,7 +38,7 @@ header.wp-block-template-part {
   &.fullheader {
     transition: 0.35s;
     transform: translateY(0);
-    border-bottom: 0.1rem solid $primary;
+    border-bottom: none;
   }
 
   &+main {
@@ -34,9 +53,7 @@ header.wp-block-template-part {
     right: 0;
   }
 
-  &.fullheader {
-    border-bottom: none;
-  }
+
 
   .wp-block-buttons>.wp-block-button {
     border-radius: 1rem !important;

@@ -4882,6 +4882,17 @@ body.active .menu-content {
   padding-bottom: 6rem;
 }
 
+.has-global-padding {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+@media only screen and (min-width: 768px) {
+  .has-global-padding {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+}
+
 .ProductTemplate {
   padding: 1.5rem !important;
 }

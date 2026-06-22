@@ -4912,6 +4912,12 @@ body.active .menu-content {
     padding-left: 1rem;
   }
 }
+@media only screen and (min-width: 1024px) {
+  .has-global-padding {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
 
 .ProductTemplate {
   padding: 1.5rem !important;

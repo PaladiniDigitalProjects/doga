@@ -186,6 +186,11 @@
     padding-right: 1rem;
     padding-left: 1rem;
   }
+
+  @include laptop {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
 
 

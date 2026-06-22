@@ -1,8 +1,31 @@
 // PDS Lightbox Button styles
 
+// El wrapper recibe las clases/estilos de color, tipografía, borde y padding
+// que Gutenberg inyecta automáticamente (supports). El <button> interno los
+// hereda para verse exactamente igual que un botón estándar.
+.pds-lb-wrapper,
+.pds-lb-wrapper-editor {
+	display: inline-block;
+
+	&.alignleft  { float: left; }
+	&.alignright { float: right; }
+	&.aligncenter { display: flex; justify-content: center; }
+}
+
 .pds-lb-trigger {
 	cursor: pointer;
 	display: inline-block;
+	width: 100%;
+	box-sizing: border-box;
+	font: inherit;
+	color: inherit;
+	background: inherit;
+	border-radius: inherit;
+	border-color: inherit;
+	border-style: inherit;
+	border-width: inherit;
+	padding: inherit;
+	text-decoration: none;
 }
 
 // Overlay (mismo estilo que pds-query-lightbox para consistencia visual)

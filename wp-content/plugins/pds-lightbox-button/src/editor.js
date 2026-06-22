@@ -7,11 +7,14 @@ import {
 	useBlockProps,
 	RichText,
 	InnerBlocks,
+	BlockControls,
 } from '@wordpress/block-editor';
-import { Button, Modal } from '@wordpress/components';
+import { Button, Modal, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
+
+const WIDTHS = [ 25, 50, 75, 100 ];
 
 const CloseIcon = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -32,8 +35,11 @@ registerBlockType( 'pds-lightbox/button', {
 	},
 
 	edit( { attributes, setAttributes, clientId } ) {
-		const { label } = attributes;
-		const blockProps = useBlockProps( { className: 'pds-lb-wrapper-editor' } );
+		const { label, width } = attributes;
+		const blockProps = useBlockProps( {
+			className: 'pds-lb-wrapper-editor',
+			style: width ? { width: `${ width }%` } : undefined,
+		} );
 		const [ isModalOpen, setModalOpen ] = useState( false );
 
 		const innerBlocksCount = useSelect(
@@ -46,6 +52,22 @@ registerBlockType( 'pds-lightbox/button', {
 
 		return (
 			<>
+				<BlockControls>
+					<ToolbarGroup>
+						{ WIDTHS.map( ( w ) => (
+							<ToolbarButton
+								key={ w }
+								isPressed={ width === w }
+								onClick={ () =>
+									setAttributes( { width: width === w ? undefined : w } )
+								}
+							>
+								{ w }%
+							</ToolbarButton>
+						) ) }
+					</ToolbarGroup>
+				</BlockControls>
+
 				<div { ...blockProps }>
 					<RichText
 						tagName="span"
@@ -85,8 +107,11 @@ registerBlockType( 'pds-lightbox/button', {
 	},
 
 	save( { attributes } ) {
-		const { label } = attributes;
-		const blockProps = useBlockProps.save( { className: 'pds-lb-wrapper' } );
+		const { label, width } = attributes;
+		const blockProps = useBlockProps.save( {
+			className: 'pds-lb-wrapper',
+			style: width ? { width: `${ width }%` } : undefined,
+		} );
 
 		return (
 			<div { ...blockProps }>

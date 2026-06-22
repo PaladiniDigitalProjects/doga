@@ -52,6 +52,29 @@ function pds_lb_register_block() {
 		'script'        => 'pds-lb-frontend',
 		'attributes'    => [
 			'label' => [ 'type' => 'string', 'default' => 'Más información' ],
+			'width' => [ 'type' => 'number' ],
+		],
+		'supports'      => [
+			'className' => true,
+			'align'     => [ 'left', 'center', 'right' ],
+			'color'     => [
+				'background' => true,
+				'text'       => true,
+				'gradients'  => true,
+			],
+			'typography' => [
+				'fontSize'   => true,
+				'lineHeight' => true,
+			],
+			'spacing' => [
+				'padding' => true,
+			],
+			'border' => [
+				'color'  => true,
+				'radius' => true,
+				'style'  => true,
+				'width'  => true,
+			],
 		],
 	] );
 }

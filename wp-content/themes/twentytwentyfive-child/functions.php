@@ -1401,3 +1401,45 @@ add_action('wpforms_wp_footer_end', function () {
             'edit_others_pages' => true,
         )
     );
+
+/* FEATURED IMAGE COLUMN EN LISTADOS DE ADMIN (posts, pages y todos los post types con soporte de thumbnail) */
+
+add_action( 'init', function () {
+    foreach ( get_post_types( [ 'show_ui' => true ] ) as $post_type ) {
+        if ( ! post_type_supports( $post_type, 'thumbnail' ) ) {
+            continue;
+        }
+        add_filter( "manage_{$post_type}_posts_columns", 'pds_add_featured_image_column' );
+        add_action( "manage_{$post_type}_posts_custom_column", 'pds_render_featured_image_column', 10, 2 );
+    }
+}, 20 );
+
+function pds_add_featured_image_column( $columns ) {
+    $new_columns = [];
+    foreach ( $columns as $key => $label ) {
+        if ( 'title' === $key ) {
+            $new_columns['pds_featured_image'] = __( 'Image', 'PDP' );
+        }
+        $new_columns[ $key ] = $label;
+    }
+    return $new_columns;
+}
+
+function pds_render_featured_image_column( $column, $post_id ) {
+    if ( 'pds_featured_image' !== $column ) {
+        return;
+    }
+    if ( has_post_thumbnail( $post_id ) ) {
+        echo get_the_post_thumbnail(
+            $post_id,
+            [ 60, 60 ],
+            [ 'style' => 'width:60px;height:60px;object-fit:cover;border-radius:4px;' ]
+        );
+    } else {
+        echo '—';
+    }
+}
+
+add_action( 'admin_head', function () {
+    echo '<style>.column-pds_featured_image{max-width:200px;}</style>';
+} );

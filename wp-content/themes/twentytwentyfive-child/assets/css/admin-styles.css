@@ -3443,6 +3443,10 @@ body.active .menu-content {
   height: auto !important;
 }
 
+.donwloadPdf a {
+  margin-bottom: 1.25rem;
+}
+
 /* SJD TABS */
 .tabs-banner {
   position: relative;

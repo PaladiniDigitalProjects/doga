@@ -17,6 +17,22 @@ body {
 
 /* MENU NAV */
 
+@include mobile {
+
+  .menu {
+    .wp-block-navigation {
+      .wp-block-navigation-submenu {
+        display: flex;
+        flex-direction: row;
+
+        .wp-block-navigation__submenu-container {
+          display: block !important;
+        }
+      }
+    }
+  }
+}
+
 
 .menu {
   display: flex;
@@ -35,6 +51,8 @@ body {
 
       }
     }
+
+
   }
 
   .wpml-language-switcher-block {
@@ -96,6 +114,7 @@ body {
 
 
     ul.wp-block-navigation-submenu {
+
       padding: 1rem 0.5rem 1rem 0.5rem !important;
       border-radius: 1rem !important;
       background-color: $primary !important;

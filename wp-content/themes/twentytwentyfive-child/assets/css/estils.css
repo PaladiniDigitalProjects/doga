@@ -1028,6 +1028,14 @@ figcaption.wp-element-caption strong {
   opacity: 1 !important;
 }
 
+.ps-card__img {
+  background-color: #ffffff !important;
+}
+
+.ps-card__body {
+  background-color: #f4f8fd !important;
+}
+
 @media only screen and (min-width: 320px) {
   html.has-modal-open header.wp-block-template-part {
     position: relative;
@@ -3111,6 +3119,15 @@ body.active .menu-content {
 }
 
 /* MENU NAV */
+@media only screen and (min-width: 320px) {
+  .menu .wp-block-navigation .wp-block-navigation-submenu {
+    display: flex;
+    flex-direction: row;
+  }
+  .menu .wp-block-navigation .wp-block-navigation-submenu .wp-block-navigation__submenu-container {
+    display: block !important;
+  }
+}
 .menu {
   display: flex;
   justify-content: space-between;

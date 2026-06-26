@@ -64,7 +64,7 @@ button.pds-lb-trigger {
 .pds-lb-modal {
 	background: #fff;
 	border-radius: 0.8rem;
-	max-width: 860px;
+	max-width: 450px;
 	width: 100%;
 	max-height: 90vh;
 	overflow-y: auto;
@@ -122,6 +122,19 @@ button.pds-lb-trigger {
 			color: #F40000;
 			opacity: 0.85;
 		}
+	}
+
+	// El texto de los campos del formulario usa por defecto el gris #444 del tema del WPForms.
+	// Forzamos el navy de marca (legible + consistente con el lightbox) sobreescribiendo la
+	// variable CSS del propio WPForms; afecta solo a los forms dentro de este lightbox.
+	.wpforms-container {
+		--wpforms-field-text-color: #0D3B5D;
+	}
+
+	input,
+	textarea,
+	select {
+		color: #0D3B5D;
 	}
 }
 

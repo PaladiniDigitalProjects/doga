@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PDS Lightbox Button
  * Description: Bloque tipo "botón" que al hacer clic abre un lightbox con cualquier contenido dentro (texto, imagen, formulario WPForms, etc.).
- * Version:     1.6.0
+ * Version:     1.6.1
  * Requires at least: 6.1
  * Requires PHP: 7.4
  * Author:      Daniel Paladini

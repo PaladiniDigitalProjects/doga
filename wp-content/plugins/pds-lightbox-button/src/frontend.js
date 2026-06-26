@@ -57,20 +57,14 @@
 				return;
 			}
 
-			// Click on the backdrop itself (not on the modal content)
-			if ( e.target.classList.contains( 'pds-lb-overlay' ) ) {
-				closeOverlay( e.target );
-			}
+			// NOTA: el lightbox SOLO se cierra con la X. No se cierra al clicar el fondo (backdrop)
+			// ni con Escape, para que el usuario pueda ver la validación/confirmación del envío del
+			// formulario antes de cerrarlo manualmente.
 		},
 		true
 	);
 
 	document.addEventListener( 'keydown', function ( e ) {
-		if ( e.key === 'Escape' ) {
-			document.querySelectorAll( '.pds-lb-overlay.is-active' ).forEach( closeOverlay );
-			return;
-		}
-
 		// El trigger es un <a role="button"> → activarlo con Enter/Espacio como un botón nativo.
 		if ( e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar' ) {
 			const trigger = e.target.closest && e.target.closest( '.pds-lb-trigger' );

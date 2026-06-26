@@ -3,8 +3,7 @@
 // El wrapper recibe las clases/estilos de color, tipografía, borde y padding
 // que Gutenberg inyecta automáticamente (supports). El <button> interno los
 // hereda para verse exactamente igual que un botón estándar.
-.pds-lb-wrapper,
-.pds-lb-wrapper-editor {
+.pds-lb-wrapper {
 	display: inline-block;
 
 	&.alignleft  { float: left; }
@@ -25,7 +24,22 @@
 	border-style: inherit;
 	border-width: inherit;
 	padding: inherit;
+	text-align: center;
 	text-decoration: none;
+}
+
+// ─── Block style: Outline ─────────────────────────────────────────
+// Fill (por defecto), Icon Right/Left/Bottom y Tag reutilizan el CSS del tema
+// (`.is-style-…`). Outline se define aquí, replicando el de core/button: fondo
+// transparente y borde en el color del texto.
+.pds-lb-wrapper.is-style-outline {
+	background-color: transparent !important;
+	background-image: none !important;
+
+	> .pds-lb-trigger {
+		background: transparent;
+		border: 2px solid currentColor;
+	}
 }
 
 // Overlay (mismo estilo que pds-query-lightbox para consistencia visual)
@@ -79,27 +93,56 @@
 }
 
 .pds-lb-body {
-	padding: 2rem;
+	// Mismos tokens de marca que pds-query-lightbox (.pds-ql-content / .pds-ql-text)
+	padding: 1.5rem 2rem 2rem;
+	color: #0D3B5D;
+	line-height: 1.7;
+	font-size: 1rem;
 
 	img {
 		max-width: 100%;
 		height: auto;
 	}
+
+	// Títulos en navy de marca
+	h1, h2, h3, h4, h5, h6 {
+		color: #0D3B5D;
+		line-height: 1.2;
+	}
+
+	// Enlaces de texto en rojo de marca; no pisa los botones de Gutenberg
+	a:not(.wp-block-button__link):not(.wp-element-button) {
+		color: #F40000;
+		transition: opacity 0.2s;
+
+		&:hover {
+			color: #F40000;
+			opacity: 0.85;
+		}
+	}
 }
 
 // ─── Editor only ──────────────────────────────────────────────────
-.pds-lb-wrapper-editor {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 0.75rem;
+// Contenedor del lightbox visible inline en el editor para editar el contenido.
+.pds-lb-editor-content {
+	margin-top: 0.75rem;
 	padding: 1rem;
-	border: 1px dashed #ccc;
+	border: 1px dashed #c3c4c7;
 	border-radius: 0.5rem;
-}
+	background: #f6f7f7;
 
-.pds-lb-edit-modal {
-	.components-modal__content {
-		max-width: 700px;
+	// Oculto cuando el toggle del aside está desactivado.
+	&.is-collapsed {
+		display: none;
+	}
+
+	&__label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: 11px;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: #757575;
 	}
 }

@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: ACF Product Details Block
+ * Plugin Name: PDS ACF Product Details Block
  * Description: Bloque de Gutenberg que muestra automáticamente los campos ACF del grupo "product details" en productos.
- * Author: Tu Nombre
- * Version: 1.0.0
+ * Author: Daniel Paladini
+ * Version: 1.1.0
  * Text Domain: acf-product-details-block
  */
 
@@ -198,7 +198,11 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     } ) );
 
     // Renombrar labels con unidades.
-    $label_overrides = array( 'pd_weight' => 'Weight (Kg)' );
+    $label_overrides = array(
+        'pd_weight'         => 'Weight (Kg)',
+        'pd_torque'         => 'Power (W)',
+        'espd_level_sensor' => 'Hall Sensor',
+    );
     foreach ( $fields as &$f ) {
         if ( isset( $label_overrides[ $f['name'] ] ) ) {
             $f['label'] = $label_overrides[ $f['name'] ];
@@ -209,7 +213,7 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     // Pares de campos min/max que se muestran como rango "min–max".
     $range_pairs = array(
         array( 'min' => 'pd_minimum_nominal_torque', 'max' => 'pd_maximum_nominal_torque', 'label' => 'Nominal Torque (Nm)' ),
-        array( 'min' => 'pd_minimum_speed',          'max' => 'pd_maximum_speed',          'label' => 'Speed (rpm)' ),
+        array( 'min' => 'pd_minimum_speed',          'max' => 'pd_maximum_speed',          'label' => 'Nominal Speed (rpm)' ),
     );
     foreach ( $range_pairs as $pair ) {
         $min_idx = null;

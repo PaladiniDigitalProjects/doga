@@ -13,12 +13,17 @@
 		document.body.style.overflow = '';
 	}
 
+	function openFromTrigger( trigger ) {
+		const wrapper = trigger.closest( '.pds-lb-wrapper' );
+		const overlay = wrapper && wrapper.querySelector( '.pds-lb-overlay' );
+		if ( overlay ) openOverlay( overlay );
+	}
+
 	document.addEventListener( 'click', function ( e ) {
 		const trigger = e.target.closest( '.pds-lb-trigger' );
 		if ( trigger ) {
-			const wrapper = trigger.closest( '.pds-lb-wrapper' );
-			const overlay = wrapper && wrapper.querySelector( '.pds-lb-overlay' );
-			if ( overlay ) openOverlay( overlay );
+			e.preventDefault();
+			openFromTrigger( trigger );
 			return;
 		}
 
@@ -36,7 +41,18 @@
 	} );
 
 	document.addEventListener( 'keydown', function ( e ) {
-		if ( e.key !== 'Escape' ) return;
-		document.querySelectorAll( '.pds-lb-overlay.is-active' ).forEach( closeOverlay );
+		if ( e.key === 'Escape' ) {
+			document.querySelectorAll( '.pds-lb-overlay.is-active' ).forEach( closeOverlay );
+			return;
+		}
+
+		// El trigger es un <a role="button"> → activarlo con Enter/Espacio como un botón nativo.
+		if ( e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar' ) {
+			const trigger = e.target.closest && e.target.closest( '.pds-lb-trigger' );
+			if ( trigger ) {
+				e.preventDefault();
+				openFromTrigger( trigger );
+			}
+		}
 	} );
 } )();

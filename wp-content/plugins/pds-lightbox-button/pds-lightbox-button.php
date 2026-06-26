@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PDS Lightbox Button
  * Description: Bloque tipo "botón" que al hacer clic abre un lightbox con cualquier contenido dentro (texto, imagen, formulario WPForms, etc.).
- * Version:     1.0.0
+ * Version:     1.2.0
  * Requires at least: 6.1
  * Requires PHP: 7.4
  * Author:      Ricard Paladini Digital Solutions
@@ -20,12 +20,15 @@ add_action( 'init', 'pds_lb_register_block' );
 
 function pds_lb_register_block() {
 
-	// Editor script
+	// Editor script — deps + version desde el asset generado por el build
+	// (imprescindible: incluye `react-jsx-runtime`, requerido por @wordpress/scripts v30;
+	//  hardcodear las deps dejaba fuera esa dependencia → el bloque no se registraba en WP 7.0).
+	$editor_asset = require PDS_LB_DIR . 'build/editor.asset.php';
 	wp_register_script(
 		'pds-lb-editor',
 		PDS_LB_URL . 'build/editor.js',
-		[ 'wp-blocks', 'wp-block-editor', 'wp-components', 'wp-element', 'wp-i18n', 'wp-data' ],
-		filemtime( PDS_LB_DIR . 'build/editor.js' ),
+		$editor_asset['dependencies'],
+		$editor_asset['version'],
 		true
 	);
 
@@ -77,4 +80,19 @@ function pds_lb_register_block() {
 			],
 		],
 	] );
+
+	// Estilos de botón (mismos que core/button en este sitio). Los `name` coinciden con los
+	// que el tema registra para `core/button`, así que reutilizan su CSS (`.is-style-…`).
+	// Fill = look por defecto; Outline lo refuerza el SCSS del plugin; Icon*/Tag vienen del tema.
+	$button_styles = [
+		[ 'name' => 'fill',                      'label' => __( 'Fill', 'pds-lightbox-button' ),              'is_default' => true ],
+		[ 'name' => 'outline',                   'label' => __( 'Outline', 'pds-lightbox-button' ) ],
+		[ 'name' => 'button-icon-right',         'label' => __( 'Icon Right', 'pds-lightbox-button' ) ],
+		[ 'name' => 'button-icon-right-bottom',  'label' => __( 'Icon Right Bottom', 'pds-lightbox-button' ) ],
+		[ 'name' => 'button-icon-left',          'label' => __( 'Icon Left', 'pds-lightbox-button' ) ],
+		[ 'name' => 'button-tag',                'label' => __( 'Tag', 'pds-lightbox-button' ) ],
+	];
+	foreach ( $button_styles as $style ) {
+		register_block_style( 'pds-lightbox/button', $style );
+	}
 }

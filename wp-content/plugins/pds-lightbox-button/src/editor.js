@@ -8,10 +8,15 @@ import {
 	RichText,
 	InnerBlocks,
 	BlockControls,
+	InspectorControls,
 } from '@wordpress/block-editor';
-import { Button, Modal, ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import {
+	ToolbarGroup,
+	ToolbarButton,
+	PanelBody,
+	ToggleControl,
+} from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 const WIDTHS = [ 25, 50, 75, 100 ];
@@ -24,31 +29,68 @@ const CloseIcon = () => (
 	</svg>
 );
 
+// Estructura del lightbox (overlay + modal + cierre + body), compartida por save() y el deprecated.
+const Lightbox = () => (
+	<div className="pds-lb-overlay" role="presentation">
+		<div className="pds-lb-modal shadow20" role="dialog" aria-modal="true">
+			<button type="button" className="pds-lb-close" aria-label={ __( 'Cerrar', 'pds-lightbox-button' ) }>
+				<CloseIcon />
+			</button>
+			<div className="pds-lb-body">
+				<InnerBlocks.Content />
+			</div>
+		</div>
+	</div>
+);
+
+const ATTRIBUTES = {
+	label: { type: 'string', default: 'Más información' },
+	width: { type: 'number' },
+};
+
 registerBlockType( 'pds-lightbox/button', {
 	title: __( 'Lightbox Button', 'pds-lightbox-button' ),
 	description: __( 'Un botón que abre un lightbox con cualquier contenido dentro (texto, imagen, formulario…).', 'pds-lightbox-button' ),
 	category: 'widgets',
 	icon: 'lightbulb',
+	// Opciones estándar de botón (igual que core/button): color, tipografía, borde, padding.
 	supports: {
 		className: true,
 		align: [ 'left', 'center', 'right' ],
+		color: {
+			background: true,
+			text: true,
+			gradients: true,
+		},
+		typography: {
+			fontSize: true,
+			lineHeight: true,
+		},
+		spacing: {
+			padding: true,
+		},
+		border: {
+			color: true,
+			radius: true,
+			style: true,
+			width: true,
+		},
 	},
 
-	edit( { attributes, setAttributes, clientId } ) {
+	edit( { attributes, setAttributes } ) {
 		const { label, width } = attributes;
+
+		// Estado solo-editor: mostrar/ocultar el contenedor del lightbox.
+		// No es un atributo → no ensucia el post ni afecta a la web.
+		const [ showContent, setShowContent ] = useState( true );
+
+		// El wrapper recibe los estilos de los supports (color, borde, tipografía, padding) y la
+		// clase is-style-* del estilo elegido; el botón (<a>) los hereda vía CSS y, al ser hijo
+		// directo, le aplican los estilos de icono/tag del tema (`.is-style-… > a`).
 		const blockProps = useBlockProps( {
-			className: 'pds-lb-wrapper-editor',
+			className: 'pds-lb-wrapper',
 			style: width ? { width: `${ width }%` } : undefined,
 		} );
-		const [ isModalOpen, setModalOpen ] = useState( false );
-
-		const innerBlocksCount = useSelect(
-			( select ) => {
-				const block = select( 'core/block-editor' ).getBlock( clientId );
-				return block ? block.innerBlocks.length : 0;
-			},
-			[ clientId ]
-		);
 
 		return (
 			<>
@@ -68,40 +110,41 @@ registerBlockType( 'pds-lightbox/button', {
 					</ToolbarGroup>
 				</BlockControls>
 
+				<InspectorControls>
+					<PanelBody title={ __( 'Lightbox', 'pds-lightbox-button' ) }>
+						<ToggleControl
+							label={ __( 'Mostrar contenido en el editor', 'pds-lightbox-button' ) }
+							help={ __(
+								'Muestra u oculta el contenedor editable del lightbox. Solo afecta al editor, no a la web.',
+								'pds-lightbox-button'
+							) }
+							checked={ showContent }
+							onChange={ setShowContent }
+						/>
+					</PanelBody>
+				</InspectorControls>
+
+				{ /* Botón (preview con los estilos estándar aplicados) */ }
 				<div { ...blockProps }>
 					<RichText
-						tagName="span"
+						tagName="a"
 						className="wp-block-button__link pds-lb-trigger"
 						value={ label }
 						onChange={ ( val ) => setAttributes( { label: val } ) }
 						allowedFormats={ [] }
 						placeholder={ __( 'Texto del botón…', 'pds-lightbox-button' ) }
 					/>
-
-					<Button
-						variant="secondary"
-						className="pds-lb-edit-content-btn"
-						onClick={ () => setModalOpen( true ) }
-					>
-						{ innerBlocksCount > 0
-							? __( 'Editar contenido del lightbox', 'pds-lightbox-button' )
-							: __( 'Añadir contenido al lightbox', 'pds-lightbox-button' ) }
-					</Button>
 				</div>
 
-				{ isModalOpen && (
-					<Modal
-						title={ __( 'Contenido del lightbox', 'pds-lightbox-button' ) }
-						onRequestClose={ () => setModalOpen( false ) }
-						className="pds-lb-edit-modal"
-						shouldCloseOnClickOutside={ false }
-					>
-						<InnerBlocks templateLock={ false } />
-						<Button variant="primary" onClick={ () => setModalOpen( false ) }>
-							{ __( 'Listo', 'pds-lightbox-button' ) }
-						</Button>
-					</Modal>
-				) }
+				{ /* Contenedor del lightbox, editable inline */ }
+				<div
+					className={ `pds-lb-editor-content${ showContent ? '' : ' is-collapsed' }` }
+				>
+					<span className="pds-lb-editor-content__label">
+						{ __( 'Contenido del lightbox', 'pds-lightbox-button' ) }
+					</span>
+					<InnerBlocks templateLock={ false } />
+				</div>
 			</>
 		);
 	},
@@ -115,21 +158,42 @@ registerBlockType( 'pds-lightbox/button', {
 
 		return (
 			<div { ...blockProps }>
-				<button type="button" className="wp-block-button__link pds-lb-trigger" aria-haspopup="dialog">
+				<a className="wp-block-button__link pds-lb-trigger" role="button" tabIndex={ 0 } aria-haspopup="dialog">
 					<RichText.Content tagName="span" value={ label } />
-				</button>
-
-				<div className="pds-lb-overlay" role="presentation">
-					<div className="pds-lb-modal shadow20" role="dialog" aria-modal="true">
-						<button type="button" className="pds-lb-close" aria-label={ __( 'Cerrar', 'pds-lightbox-button' ) }>
-							<CloseIcon />
-						</button>
-						<div className="pds-lb-body">
-							<InnerBlocks.Content />
-						</div>
-					</div>
-				</div>
+				</a>
+				<Lightbox />
 			</div>
 		);
 	},
+
+	// v1: el trigger era un <button>. Reproducir aquí para migrar las instancias guardadas.
+	deprecated: [
+		{
+			attributes: ATTRIBUTES,
+			supports: {
+				className: true,
+				align: [ 'left', 'center', 'right' ],
+				color: { background: true, text: true, gradients: true },
+				typography: { fontSize: true, lineHeight: true },
+				spacing: { padding: true },
+				border: { color: true, radius: true, style: true, width: true },
+			},
+			save( { attributes } ) {
+				const { label, width } = attributes;
+				const blockProps = useBlockProps.save( {
+					className: 'pds-lb-wrapper',
+					style: width ? { width: `${ width }%` } : undefined,
+				} );
+
+				return (
+					<div { ...blockProps }>
+						<button type="button" className="wp-block-button__link pds-lb-trigger" aria-haspopup="dialog">
+							<RichText.Content tagName="span" value={ label } />
+						</button>
+						<Lightbox />
+					</div>
+				);
+			},
+		},
+	],
 } );

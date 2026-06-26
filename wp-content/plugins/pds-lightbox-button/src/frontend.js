@@ -16,29 +16,54 @@
 	function openFromTrigger( trigger ) {
 		const wrapper = trigger.closest( '.pds-lb-wrapper' );
 		const overlay = wrapper && wrapper.querySelector( '.pds-lb-overlay' );
-		if ( overlay ) openOverlay( overlay );
+		if ( ! overlay ) return;
+
+		// Inyecta la URL del recurso en el campo oculto de WPForms que haya dentro de ESTE
+		// lightbox (campo con clase CSS "pds-lb-download"). La URL viene en data-pds-download
+		// (no en href): así el <a> no es navegable y ni Luge ni el navegador pueden "saltar".
+		const href =
+			trigger.getAttribute( 'data-pds-download' ) ||
+			trigger.getAttribute( 'href' );
+		if ( href && href !== '#' ) {
+			const field = overlay.querySelector(
+				'.pds-lb-download input, input.pds-lb-download'
+			);
+			if ( field ) {
+				field.value = href;
+			}
+		}
+
+		openOverlay( overlay );
 	}
 
-	document.addEventListener( 'click', function ( e ) {
-		const trigger = e.target.closest( '.pds-lb-trigger' );
-		if ( trigger ) {
-			e.preventDefault();
-			openFromTrigger( trigger );
-			return;
-		}
+	// En FASE DE CAPTURA: el trigger es un <a href="recurso">, y en esta web conviven otros
+	// scripts (pds-query-lightbox, predictive-search…) que hacen stopPropagation. Si corren
+	// antes, nuestro handler en burbujeo no llegaría y el <a> navegaría. Capturando, corremos
+	// primero y garantizamos el preventDefault.
+	document.addEventListener(
+		'click',
+		function ( e ) {
+			const trigger = e.target.closest( '.pds-lb-trigger' );
+			if ( trigger ) {
+				e.preventDefault();
+				openFromTrigger( trigger );
+				return;
+			}
 
-		const closeBtn = e.target.closest( '.pds-lb-close' );
-		if ( closeBtn ) {
-			const overlay = closeBtn.closest( '.pds-lb-overlay' );
-			if ( overlay ) closeOverlay( overlay );
-			return;
-		}
+			const closeBtn = e.target.closest( '.pds-lb-close' );
+			if ( closeBtn ) {
+				const overlay = closeBtn.closest( '.pds-lb-overlay' );
+				if ( overlay ) closeOverlay( overlay );
+				return;
+			}
 
-		// Click on the backdrop itself (not on the modal content)
-		if ( e.target.classList.contains( 'pds-lb-overlay' ) ) {
-			closeOverlay( e.target );
-		}
-	} );
+			// Click on the backdrop itself (not on the modal content)
+			if ( e.target.classList.contains( 'pds-lb-overlay' ) ) {
+				closeOverlay( e.target );
+			}
+		},
+		true
+	);
 
 	document.addEventListener( 'keydown', function ( e ) {
 		if ( e.key === 'Escape' ) {

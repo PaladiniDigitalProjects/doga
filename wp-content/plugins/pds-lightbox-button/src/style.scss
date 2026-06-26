@@ -1,8 +1,8 @@
 // PDS Lightbox Button styles
 
-// El wrapper recibe las clases/estilos de color, tipografía, borde y padding
-// que Gutenberg inyecta automáticamente (supports). El <button> interno los
-// hereda para verse exactamente igual que un botón estándar.
+// El wrapper solo aporta layout (alineación + ancho) y la clase is-style-* (para que
+// casen los selectores `.is-style-… > a` del tema). Los estilos de color/borde/padding/
+// tipografía (supports) se aplican directamente al botón <a>, no al contenedor.
 .pds-lb-wrapper {
 	display: inline-block;
 
@@ -16,6 +16,15 @@
 	display: inline-block;
 	width: 100%;
 	box-sizing: border-box;
+	text-align: center;
+	text-decoration: none;
+}
+
+// Compat con instancias guardadas con el markup v1.0 (trigger = <button>): allí los supports
+// iban en el wrapper y el botón los heredaba vía CSS. Se mantiene la herencia SOLO para el
+// elemento <button> para no romper instancias antiguas sin re-guardar. El markup nuevo usa
+// <a>, que recibe los estilos directamente (sin herencia).
+button.pds-lb-trigger {
 	font: inherit;
 	color: inherit;
 	background: inherit;
@@ -24,22 +33,16 @@
 	border-style: inherit;
 	border-width: inherit;
 	padding: inherit;
-	text-align: center;
-	text-decoration: none;
 }
 
 // ─── Block style: Outline ─────────────────────────────────────────
 // Fill (por defecto), Icon Right/Left/Bottom y Tag reutilizan el CSS del tema
 // (`.is-style-…`). Outline se define aquí, replicando el de core/button: fondo
 // transparente y borde en el color del texto.
-.pds-lb-wrapper.is-style-outline {
+.pds-lb-wrapper.is-style-outline > .pds-lb-trigger {
 	background-color: transparent !important;
 	background-image: none !important;
-
-	> .pds-lb-trigger {
-		background: transparent;
-		border: 2px solid currentColor;
-	}
+	border: 2px solid currentColor;
 }
 
 // Overlay (mismo estilo que pds-query-lightbox para consistencia visual)

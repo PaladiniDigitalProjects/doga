@@ -133,21 +133,20 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     $target_group = null;
 
     foreach ( $groups as $group ) {
-        if ( ! empty( $group['title'] ) && false !== stripos( $group['title'], 'product details' ) ) {
+        // "product detail" (singular) hace match tanto con "Product Detail"
+        // como con "Product Details" — el grupo real se llama "Product Detail".
+        if ( ! empty( $group['title'] ) && false !== stripos( $group['title'], 'product detail' ) ) {
             $target_group = $group;
             break;
         }
     }
 
-    // Si no encontramos uno cuyo título contenga "product details",
-    // usamos el primero como fallback, pero mostramos aviso en el admin.
+    // Si no encontramos uno cuyo título contenga "product detail",
+    // usamos el primero como fallback. IMPORTANTE: no imprimir aquí (echo) —
+    // un render_callback debe DEVOLVER string; hacer echo rompe las cabeceras
+    // del admin ("headers already sent") y saca el aviso al inicio de la página.
     if ( ! $target_group ) {
         $target_group = reset( $groups );
-
-        if ( is_admin() ) {
-            // Mensaje breve dentro del editor para facilitar el debug.
-            echo '<p><em>Advertencia: no se encontró un grupo ACF cuyo título contenga "product details". Mostrando el primer grupo disponible: ' . esc_html( $target_group['title'] ) . '.</em></p>';
-        }
     }
 
     $group_key = $target_group['key'];

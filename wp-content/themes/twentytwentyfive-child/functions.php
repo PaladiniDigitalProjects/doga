@@ -1443,3 +1443,23 @@ function pds_render_featured_image_column( $column, $post_id ) {
 add_action( 'admin_head', function () {
     echo '<style>.column-pds_featured_image{max-width:200px;}</style>';
 } );
+
+/**
+ * Disables the WordPress API for unauthorized users.
+ */
+function disable_wp_api() {
+	add_filter( 'rest_authentication_errors', function( $access ){
+		if ( ! is_user_logged_in() ) { 
+			$access = new WP_Error( 'rest_not_logged_in', 'You are not currently logged in.', [ 'status' => 401 ] ); 
+		}
+ 
+		return $access;
+	} );
+ 
+	// also remove actions added by wp-includes/default-filters.php
+	remove_action( 'wp_head', 'rest_output_link_wp_head' );
+	remove_action( 'wp_head', 'wp_oembed_add_discovery_links' );
+	remove_action( 'template_redirect', 'rest_output_link_header' );
+}
+ 
+disable_wp_api();

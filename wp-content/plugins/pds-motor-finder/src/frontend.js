@@ -48,14 +48,39 @@ function initFinder( finder ) {
         scheduleUpdate();
     } ) );
 
-    // ── Reset ──
-    resetBtn.addEventListener( 'click', () => {
+    // ── Vaciar todos los controles (sin lanzar la petición) ──
+    function clearControls() {
         checkboxes.forEach( cb  => { cb.checked = false; } );
         selects.forEach( sel => {
             sel.value = '';
             sel.classList.remove( 'pds-mf__select--active' );
         } );
+    }
+
+    // ── Reset ──
+    resetBtn.addEventListener( 'click', () => {
+        clearControls();
+        currentPage = 1;
         fetchResults();
+    } );
+
+    // ── Reinicializar el filtro en cada carga/restauración de la página ──
+    // Los navegadores restauran el estado de los controles (autofill de form /
+    // bfcache) al volver a la página, por lo que la "búsqueda anterior" reaparece
+    // aunque el servidor renderice todos los productos. `pageshow` se dispara
+    // DESPUÉS de esa restauración → aquí garantizamos que el filtro arranca limpio.
+    window.addEventListener( 'pageshow', ( e ) => {
+        clearControls();
+        if ( e.persisted ) {
+            // Restaurado desde bfcache: los resultados también están cacheados
+            // (posiblemente filtrados) → refrescar a "todos".
+            currentPage = 1;
+            fetchResults();
+        } else {
+            // Carga fresca: el servidor ya renderizó todos los productos;
+            // solo hay que sincronizar el resumen de filtros activos.
+            updateSummary();
+        }
     } );
 
     // ── Resumen de filtros activos ──

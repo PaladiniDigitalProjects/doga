@@ -3424,6 +3424,7 @@ body.active .menu-content {
   font-size: 0.8rem;
 }
 .ProductTemplate .ProducTags span {
+  display: inline-block;
   background-color: #8194AD;
   color: #ffffff;
   text-decoration: none;

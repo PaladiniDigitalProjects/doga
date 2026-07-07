@@ -129,6 +129,7 @@ usort( $parent_terms, function( $a, $b ) use ( $slug_order ) {
                 id="pds-sel-<?php echo esc_attr( $parent->term_id ); ?>"
                 class="pds-mf__select"
                 data-parent="<?php echo esc_attr( $parent->term_id ); ?>"
+                autocomplete="off"
             >
                 <option value=""><?php echo esc_html( $parent->name ); ?></option>
                 <?php foreach ( $children as $child ) : ?>
@@ -165,6 +166,7 @@ usort( $parent_terms, function( $a, $b ) use ( $slug_order ) {
                     value="<?php echo esc_attr( $child->term_id ); ?>"
                     data-parent="<?php echo esc_attr( $parent->term_id ); ?>"
                     data-slug="<?php echo esc_attr( $child->slug ); ?>"
+                    autocomplete="off"
                 >
                 <span><?php echo esc_html( $child->name ); ?></span>
             </label>

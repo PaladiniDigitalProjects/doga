@@ -1135,6 +1135,30 @@ figcaption {
   }
 }
 
+/* MOBILE VIDEO */
+
+
+.mobileVideo {
+  border-radius: 1rem;
+
+  >video {
+    border-radius: 1rem;
+  }
+}
+
+
+/* RESET PADDING */
+
+.resetPadding {
+  padding: 0 !important;
+}
+
+/* RESET MARGIN */
+
+.resetMargin {
+  margin: 0 !important;
+}
+
 /* LLISTATS DE PRODUCTES */
 
 .wp-block-post-featured-image {

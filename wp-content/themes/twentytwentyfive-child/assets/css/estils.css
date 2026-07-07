@@ -1010,6 +1010,24 @@ figcaption.wp-element-caption strong {
   padding: 0;
 }
 
+/* MOBILE VIDEO */
+.mobileVideo {
+  border-radius: 1rem;
+}
+.mobileVideo > video {
+  border-radius: 1rem;
+}
+
+/* RESET PADDING */
+.resetPadding {
+  padding: 0 !important;
+}
+
+/* RESET MARGIN */
+.resetMargin {
+  margin: 0 !important;
+}
+
 /* LLISTATS DE PRODUCTES */
 .wp-block-post-featured-image {
   margin-left: 0;

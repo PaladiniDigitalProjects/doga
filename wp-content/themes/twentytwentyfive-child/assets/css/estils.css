@@ -247,9 +247,12 @@ figcaption.wp-element-caption strong {
     row-gap: 2rem;
   }
 }
+.grid.grid5 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
 @media only screen and (min-width: 768px) {
   .grid.grid5 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     -moz-column-gap: 1.5rem;
          column-gap: 1.5rem;
     row-gap: 1.5rem;
@@ -257,7 +260,7 @@ figcaption.wp-element-caption strong {
 }
 @media only screen and (min-width: 1024px) {
   .grid.grid5 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     -moz-column-gap: 2rem;
          column-gap: 2rem;
     row-gap: 2rem;
@@ -265,7 +268,7 @@ figcaption.wp-element-caption strong {
 }
 @media only screen and (min-width: 1240px) {
   .grid.grid5 {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
     -moz-column-gap: 2rem;
          column-gap: 2rem;
     row-gap: 2rem;
@@ -1098,14 +1101,21 @@ header.wp-block-template-part .Sub_Menus {
   right: 0;
 }
 header.wp-block-template-part .wp-block-buttons > .wp-block-button {
-  border-radius: 1rem !important;
+  border-radius: 0.5rem !important;
 }
-header.wp-block-template-part .wp-block-buttons {
-  display: none;
+header.wp-block-template-part .wp-block-site-logo {
+  width: 100%;
+  max-width: 6rem;
+}
+header.wp-block-template-part .menu {
+  padding: 0.6rem 0.25rem !important;
 }
 @media only screen and (min-width: 1024px) {
-  header.wp-block-template-part .wp-block-buttons {
-    display: block;
+  header.wp-block-template-part .wp-block-site-logo {
+    max-width: 12rem;
+  }
+  header.wp-block-template-part .menu {
+    padding: 0.825rem 1.2rem !important;
   }
 }
 

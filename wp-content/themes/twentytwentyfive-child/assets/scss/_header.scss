@@ -53,19 +53,27 @@ header.wp-block-template-part {
     right: 0;
   }
 
-
-
   .wp-block-buttons>.wp-block-button {
-    border-radius: 1rem !important;
+    border-radius: 0.5rem !important;
   }
 
-  .wp-block-buttons {
-    display: none;
+  .wp-block-site-logo {
+    width: 100%;
+    max-width: 6rem;
+  }
+
+  .menu {
+    padding: 0.6rem 0.25rem !important;
   }
 
   @include laptop {
-    .wp-block-buttons {
-      display: block;
+
+    .wp-block-site-logo {
+      max-width: 12rem;
+    }
+
+    .menu {
+      padding: 0.825rem 1.2rem !important;
     }
   }
 }

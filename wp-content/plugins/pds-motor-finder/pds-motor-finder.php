@@ -229,3 +229,57 @@ function pds_render_motor_spec_grouped( $block_content, $block ) {
 
     return $html;
 }
+
+// ─────────────────────────────────────────────────────────────
+// 5. OCULTAR el accordion "More info" cuando el producto no tiene
+//    términos motor-spec (si no, aparece un "+ More info" vacío).
+// ─────────────────────────────────────────────────────────────
+
+add_filter( 'render_block', 'pds_hide_empty_motor_spec_accordion', 10, 2 );
+
+function pds_hide_empty_motor_spec_accordion( $block_content, $block ) {
+
+    if ( 'core/accordion' !== ( $block['blockName'] ?? '' ) ) {
+        return $block_content;
+    }
+
+    // Solo actuamos sobre el accordion que contiene el post-terms de motor-spec.
+    if ( ! pds_block_contains_motor_spec_terms( $block ) ) {
+        return $block_content;
+    }
+
+    $post_id = get_the_ID();
+    if ( ! $post_id ) {
+        return $block_content;
+    }
+
+    $terms = wp_get_post_terms( $post_id, 'motor-spec', [ 'hide_empty' => false ] );
+
+    // Sin specs motor-spec → el panel iría vacío → ocultar todo el accordion.
+    if ( is_wp_error( $terms ) || empty( $terms ) ) {
+        return '';
+    }
+
+    return $block_content;
+}
+
+/**
+ * ¿El árbol de bloques contiene un core/post-terms con term = motor-spec?
+ */
+function pds_block_contains_motor_spec_terms( $block ) {
+
+    if ( 'core/post-terms' === ( $block['blockName'] ?? '' )
+        && 'motor-spec' === ( $block['attrs']['term'] ?? '' ) ) {
+        return true;
+    }
+
+    if ( ! empty( $block['innerBlocks'] ) ) {
+        foreach ( $block['innerBlocks'] as $inner ) {
+            if ( pds_block_contains_motor_spec_terms( $inner ) ) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

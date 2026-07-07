@@ -200,7 +200,6 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     $label_overrides = array(
         'pd_weight'         => 'Weight (Kg)',
         'pd_torque'         => 'Power (W)',
-        'espd_level_sensor' => 'Hall Sensor',
     );
     foreach ( $fields as &$f ) {
         if ( isset( $label_overrides[ $f['name'] ] ) ) {

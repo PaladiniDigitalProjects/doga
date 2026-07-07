@@ -6,9 +6,18 @@
 .pds-lb-wrapper {
 	display: inline-block;
 
-	&.alignleft  { float: left; }
-	&.alignright { float: right; }
-	&.aligncenter { display: flex; justify-content: center; }
+	&.alignleft {
+		float: left;
+	}
+
+	&.alignright {
+		float: right;
+	}
+
+	&.aligncenter {
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .pds-lb-trigger {
@@ -39,7 +48,7 @@ button.pds-lb-trigger {
 // Fill (por defecto), Icon Right/Left/Bottom y Tag reutilizan el CSS del tema
 // (`.is-style-…`). Outline se define aquí, replicando el de core/button: fondo
 // transparente y borde en el color del texto.
-.pds-lb-wrapper.is-style-outline > .pds-lb-trigger {
+.pds-lb-wrapper.is-style-outline>.pds-lb-trigger {
 	background-color: transparent !important;
 	background-image: none !important;
 	border: 2px solid currentColor;
@@ -108,7 +117,12 @@ button.pds-lb-trigger {
 	}
 
 	// Títulos en navy de marca
-	h1, h2, h3, h4, h5, h6 {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		color: #0D3B5D;
 		line-height: 1.2;
 	}
@@ -136,6 +150,21 @@ button.pds-lb-trigger {
 	select {
 		color: #0D3B5D;
 	}
+
+	.wpforms-title {
+		color: #c80000 !important;
+		font-style: italic;
+	}
+
+	.wpforms-submit {
+		background-color: #c80000 !important;
+		color: #fff !important;
+		border-radius: 0.5rem !important;
+
+	}
+
+
+
 }
 
 // ─── Editor only ──────────────────────────────────────────────────

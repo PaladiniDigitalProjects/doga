@@ -191,6 +191,11 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     $excluded_types = array( 'file', 'image', 'gallery', 'repeater', 'flexible_content', 'tab', 'message', 'accordion' );
     // Excluir campos concretos que no se quieren mostrar.
     $excluded_names = array( 'pd_minimum_nominal_speed', 'pd_maximum_nominal_speed' );
+    // En la plantilla de productos Wipers ("wipers-single") no aplica el
+    // campo "Level Sensor" (espd_level_sensor) → se oculta solo ahí.
+    if ( 'wipers-single' === get_page_template_slug( $post_id ) ) {
+        $excluded_names[] = 'espd_level_sensor';
+    }
     $fields = array_values( array_filter( $fields, function( $f ) use ( $excluded_types, $excluded_names ) {
         return ! in_array( $f['type'] ?? '', $excluded_types, true )
             && ! in_array( $f['name'] ?? '', $excluded_names, true );

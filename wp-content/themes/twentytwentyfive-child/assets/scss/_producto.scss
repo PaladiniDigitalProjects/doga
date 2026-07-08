@@ -310,3 +310,18 @@
 .donwloadPdf a {
   margin-bottom: 1.25rem;
 }
+
+// ── Ficha Wipers: detalles ACF en una sola columna ────────────
+// En la plantilla "wipers-single" el listado ACF (p.ej. el
+// "Product Short Description") se apila en columna en vez de las
+// dos columnas al 40% del resto de fichas.
+
+.product-template-wipers-single {
+  .ProductTemplate .apdb-product-details__list {
+    flex-direction: column;
+
+    .apdb-product-details__row {
+      width: 100%;
+    }
+  }
+}

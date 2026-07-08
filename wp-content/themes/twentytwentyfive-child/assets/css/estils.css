@@ -5067,4 +5067,11 @@ body.active .menu-content {
 
 .donwloadPdf a {
   margin-bottom: 1.25rem;
+}
+
+.product-template-wipers-single .ProductTemplate .apdb-product-details__list {
+  flex-direction: column;
+}
+.product-template-wipers-single .ProductTemplate .apdb-product-details__list .apdb-product-details__row {
+  width: 100%;
 }/*# sourceMappingURL=estils.css.map */

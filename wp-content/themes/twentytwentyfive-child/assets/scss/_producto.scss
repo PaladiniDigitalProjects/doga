@@ -224,6 +224,24 @@
         border-bottom: 1px solid #eef1f5;
         padding-bottom: 0.5rem;
 
+        ul {
+          padding-left: 0;
+          list-style: none;
+
+          li {
+            display: block;
+            position: relative;
+            padding-left: 1.2em;
+            margin-bottom: 0.5rem;
+
+            &::before {
+              content: "•";
+              position: absolute;
+              left: 0.15em;
+              top: 0;
+            }
+          }
+        }
       }
 
       .apdb-product-details__nested-list {

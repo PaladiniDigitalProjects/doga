@@ -196,6 +196,11 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     if ( 'wipers-single' === get_page_template_slug( $post_id ) ) {
         $excluded_names[] = 'espd_level_sensor';
     }
+    // En los productos de Drive Systems (market-sector "drive-system", los
+    // motores) tampoco aplica el "Level Sensor" → se oculta en todos ellos.
+    if ( has_term( 'drive-system', 'product-market-sector', $post_id ) ) {
+        $excluded_names[] = 'espd_level_sensor';
+    }
     $fields = array_values( array_filter( $fields, function( $f ) use ( $excluded_types, $excluded_names ) {
         return ! in_array( $f['type'] ?? '', $excluded_types, true )
             && ! in_array( $f['name'] ?? '', $excluded_names, true );

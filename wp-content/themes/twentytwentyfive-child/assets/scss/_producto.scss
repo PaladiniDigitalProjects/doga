@@ -1,5 +1,11 @@
 @use 'variables' as *;
 
+.columns-2.is-layout-grid {
+  h2.has-xx-large-font-size {
+    font-size: var(--wp--preset--font-size--x-large) !important;
+  }
+}
+
 // ── Ficha de producto: Especificaciones motor-spec ────────────
 // Renderizado per pds_render_motor_spec_grouped (render_block filter)
 
@@ -337,6 +343,21 @@
 .product-template-wipers-single {
   .ProductTemplate .apdb-product-details__list {
     flex-direction: column;
+
+    .apdb-product-details__row {
+      width: 100%;
+    }
+  }
+}
+
+// ── Ficha Tanques: sin flex en el listado de detalles ─────────
+// En "tanks-single" se quita el display:flex del listado ACF: las
+// filas pasan a apilarse en flujo normal, a ancho completo, en vez
+// de repartirse en dos columnas al 40%.
+
+.product-template-tanks-single {
+  .ProductTemplate .apdb-product-details__list {
+    display: block;
 
     .apdb-product-details__row {
       width: 100%;

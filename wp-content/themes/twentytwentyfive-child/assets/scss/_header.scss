@@ -39,6 +39,9 @@ header.wp-block-template-part {
     transition: 0.35s;
     transform: translateY(0);
     border-bottom: none;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background-color: rgb(255, 255, 255, 0.7);
   }
 
   &+main {
@@ -76,4 +79,14 @@ header.wp-block-template-part {
       padding: 0.825rem 1.2rem !important;
     }
   }
+}
+
+
+.wp-block-navigation__responsive-container-close svg,
+.wp-block-navigation__responsive-container-open svg {
+  fill: currentColor;
+  display: block;
+  height: 40px;
+  pointer-events: none;
+  width: 40px;
 }

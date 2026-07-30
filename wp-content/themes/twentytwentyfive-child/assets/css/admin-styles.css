@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @media all and (device-width: 768px) and (device-height: 1024px) and (orientation: portrait) {
   .ipad-portrait {
     color: red;
@@ -1089,6 +1090,8 @@ header.wp-block-template-part.fullheader {
   transition: 0.35s;
   transform: translateY(0);
   border-bottom: none;
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 header.wp-block-template-part + main {
   padding-top: 0;
@@ -1117,6 +1120,15 @@ header.wp-block-template-part .menu {
   header.wp-block-template-part .menu {
     padding: 0.825rem 1.2rem !important;
   }
+}
+
+.wp-block-navigation__responsive-container-close svg,
+.wp-block-navigation__responsive-container-open svg {
+  fill: currentColor;
+  display: block;
+  height: 40px;
+  pointer-events: none;
+  width: 40px;
 }
 
 /* ESTILS CREATS A FUNTIONS.PHP */
@@ -3226,6 +3238,10 @@ body.active .menu-content {
   content: "-";
 }
 
+.columns-2.is-layout-grid h2.has-xx-large-font-size {
+  font-size: var(--wp--preset--font-size--x-large) !important;
+}
+
 .motor-specs-grouped {
   margin: 1rem 0;
   display: flex;
@@ -3423,6 +3439,22 @@ body.active .menu-content {
   border-bottom: 1px solid #eef1f5;
   padding-bottom: 0.5rem;
 }
+.ProductTemplate .apdb-product-details__list .apdb-product-details__row .apdb-product-details__value ul {
+  padding-left: 0;
+  list-style: none;
+}
+.ProductTemplate .apdb-product-details__list .apdb-product-details__row .apdb-product-details__value ul li {
+  display: block;
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 0.5rem;
+}
+.ProductTemplate .apdb-product-details__list .apdb-product-details__row .apdb-product-details__value ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0.15em;
+  top: 0;
+}
 .ProductTemplate .apdb-product-details__list .apdb-product-details__row .apdb-product-details__nested-list {
   list-style: none;
   display: flex;
@@ -3497,6 +3529,13 @@ body.active .menu-content {
 
 .donwloadPdf a {
   margin-bottom: 1.25rem;
+}
+
+.product-template-wipers-single .ProductTemplate .apdb-product-details__list {
+  flex-direction: column;
+}
+.product-template-wipers-single .ProductTemplate .apdb-product-details__list .apdb-product-details__row {
+  width: 100%;
 }
 
 /* SJD TABS */
@@ -4094,6 +4133,10 @@ body.active .menu-content {
     left: 40% !important;
     top: 1.5rem !important;
     transform: translateX(-50%) !important;
+  }
+  .location_map .wp-block-pds-map-locations-filter-map-locations-filter h2 {
+    font-size: 32px;
+    margin-top: 60px;
   }
 }
 

@@ -201,6 +201,15 @@ function apdb_render_acf_product_details_block( $attributes, $content = '', $blo
     if ( has_term( 'drive-system', 'product-market-sector', $post_id ) ) {
         $excluded_names[] = 'espd_level_sensor';
     }
+    // En los tanques (product-line "tank-systems") no aplica la descripción de
+    // Washer Systems, que está rellenada en los 30 productos de la línea y salía
+    // en la ficha como una sección más.
+    // Se acota por taxonomía y NO por la plantilla "tanks-single": esa plantilla
+    // la comparte toda la sección Reservoirs (49 accessories y 9 washer-systems
+    // tienen el campo relleno), y en Washer Systems sí tiene sentido mostrarlo.
+    if ( has_term( 'tank-systems', 'product-line', $post_id ) ) {
+        $excluded_names[] = 'washer_system_product_shrot_description';
+    }
     $fields = array_values( array_filter( $fields, function( $f ) use ( $excluded_types, $excluded_names ) {
         return ! in_array( $f['type'] ?? '', $excluded_types, true )
             && ! in_array( $f['name'] ?? '', $excluded_names, true );
